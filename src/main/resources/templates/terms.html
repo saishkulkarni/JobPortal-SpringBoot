@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Portal - Terms of Service</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #2c3e50;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .register-btn {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        .login-btn {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .register-btn:hover {
+            background-color: #219a52;
+        }
+
+        .login-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .content-section {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 100px;
+        }
+
+        .terms-title {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .terms-content {
+            color: #34495e;
+            line-height: 1.6;
+        }
+
+        .terms-content h2 {
+            color: #2c3e50;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .terms-content p {
+            margin-bottom: 1rem;
+        }
+
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-text {
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .terms-title {
+                font-size: 2rem;
+            }
+
+            .footer {
+                padding: 1rem;
+            }
+
+            .footer-links {
+                gap: 1rem;
+            }
+
+            .footer-links a {
+                font-size: 0.9rem;
+            }
+
+            .footer-text {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="/">JobPortal</a></div>
+        <div class="nav-buttons">
+            <button class="nav-btn login-btn">Login</button>
+            <button class="nav-btn register-btn">Register</button>
+        </div>
+    </nav>
+
+    <main class="content-section">
+        <h1 class="terms-title">Terms of Service</h1>
+        <div class="terms-content">
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing and using JobPortal, you accept and agree to be bound by the terms and provision of this agreement.</p>
+
+            <h2>2. User Registration</h2>
+            <p>To access certain features of the platform, you may be required to register for an account. You agree to provide accurate information during the registration process.</p>
+
+            <h2>3. Privacy Policy</h2>
+            <p>Your use of JobPortal is also governed by our Privacy Policy. Please review our Privacy Policy, which also governs the site and informs users of our data collection practices.</p>
+
+            <h2>4. User Conduct</h2>
+            <p>You agree to use JobPortal only for lawful purposes and in a way that does not infringe the rights of, restrict or inhibit anyone else's use and enjoyment of the platform.</p>
+
+            <h2>5. Modifications</h2>
+            <p>We reserve the right to modify these terms at any time. We do so by posting and drawing attention to the updated terms on the site. Your continued use of JobPortal after changes to these terms confirms your acceptance of the updated terms.</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/about-us">About Us</a>
+                <a href="/contact">Contact</a>
+                <a href="/privacy-policy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+            </div>
+            <p class="footer-text">© 2024 JobPortal. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
