@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            color: #333333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eeeeee;
+            padding-bottom: 10px;
+        }
+        .otp {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .footer {
+            margin-top: 30px;
+            color: #666666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Hello, <span th:text="${jobSeeker.name}"></span>!</h1>
+        </div>
+        <div class="content">
+            <p>Thank you for using our service. Please use the following OTP (One-Time Password) to verify your account:</p>
+            <div class="otp">
+                <span th:text="${jobSeeker.otp}"></span>
+            </div>
+            <p>This OTP is valid for a limited time. Please do not share this code with anyone.</p>
+        </div>
+        <div class="footer">
+            <p>If you didn't request this OTP, please ignore this email.</p>
+            <h4>Best regards,<br>Your Service Team</h4>
+        </div>
+    </div>
+</body>
+</html>

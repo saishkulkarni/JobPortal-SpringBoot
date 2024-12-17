@@ -27,12 +27,13 @@ public class Recruiter {
 	@DecimalMin(value = "6000000000", message = "* Enter Proper Mobile Number")
 	@DecimalMax(value = "9999999999", message = "* Enter Proper Mobile Number")
 	private Long mobile;
-	@Pattern(regexp = "^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$",message = "* Enter minimum 8 charecter, one uppercase, one lowercase, one number and one special charecter")
+	@Pattern(regexp = "^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", message = "* Enter minimum 8 charecter, one uppercase, one lowercase, one number and one special charecter")
 	private String password;
 	@Transient
-	@Pattern(regexp = "^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$",message = "* Enter minimum 8 charecter, one uppercase, one lowercase, one number and one special charecter")
+	@Pattern(regexp = "^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", message = "* Enter minimum 8 charecter, one uppercase, one lowercase, one number and one special charecter")
 	private String confirmPassword;
-	@NotEmpty(message="* It is Required Field")
+	@NotEmpty(message = "* It is Required Field")
 	private String companyName;
-	private boolean verified;
+	private Boolean verified;
+	private Integer otp;
 }
