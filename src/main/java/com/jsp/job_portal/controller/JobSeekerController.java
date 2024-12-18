@@ -22,7 +22,6 @@ public class JobSeekerController {
 	@Autowired
 	JobSeekerService seekerService; 
 	
-	
 	@GetMapping("/register")
 	public String loadRegister(JobSeeker jobSeeker,ModelMap map) {
 		return seekerService.register(jobSeeker,map);
@@ -40,12 +39,12 @@ public class JobSeekerController {
 	}
 	
 	@PostMapping("/otp")
-	public String otp(@RequestParam("otp") int otp,@RequestParam("id") int id) {
-		return seekerService.otp(otp,id);
+	public String otp(@RequestParam("otp") int otp,@RequestParam("id") int id,HttpSession session) {
+		return seekerService.otp(otp,id,session);
 	}
 	
 	@GetMapping("/resend-otp/{id}")
-	public String resendOtp(@PathVariable("id") Integer id) {
-		return seekerService.resendOtp(id);
+	public String resendOtp(@PathVariable("id") Integer id,HttpSession session) {
+		return seekerService.resendOtp(id,session);
 	}
 }

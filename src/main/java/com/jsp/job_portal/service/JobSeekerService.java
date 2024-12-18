@@ -50,28 +50,32 @@ public class JobSeekerService {
 			seekerRepository.save(jobSeeker);
 			System.err.println(jobSeeker.getOtp());
 			emailSender.sendOtp(jobSeeker);
+			session.setAttribute("success", "Otp Sent Success!!!");
 			return "redirect:/jobseeker/otp/" + jobSeeker.getId();
 		}
 	}
 
-	public String otp(int otp, int id) {
+	public String otp(int otp, int id, HttpSession session) {
 		JobSeeker jobSeeker = seekerRepository.findById(id).orElseThrow();
 		if (jobSeeker.getOtp() == otp) {
 			jobSeeker.setVerified(true);
 			seekerRepository.save(jobSeeker);
+			session.setAttribute("success", "Account Created Successfully");
 			return "redirect:/";
 		} else {
+			session.setAttribute("error", "OTP Missmatch, Try Again");
 			return "redirect:/jobseeker/otp/" + jobSeeker.getId();
 		}
 	}
 
-	public String resendOtp(Integer id) {
+	public String resendOtp(Integer id, HttpSession session) {
 		JobSeeker jobSeeker = seekerRepository.findById(id).orElseThrow();
 		jobSeeker.setOtp(new Random().nextInt(1000, 10000));
 		jobSeeker.setVerified(false);
 		seekerRepository.save(jobSeeker);
 		System.err.println(jobSeeker.getOtp());
 		emailSender.sendOtp(jobSeeker);
+		session.setAttribute("success", "OTP Resent Success");
 		return "redirect:/jobseeker/otp/" + jobSeeker.getId();
 	}
 

@@ -164,6 +164,25 @@
 			font-size: 0.9rem;
 		}
 
+		.message {
+			position: fixed;
+			top: 80px;
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: 1001;
+			padding: 15px;
+			border-radius: 5px;
+			box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+			background-color: white;
+		}
+
+
+
+
+
+
+
 		@media (max-width: 768px) {
 			.hero-title {
 				font-size: 2rem;
@@ -217,6 +236,12 @@
 	</nav>
 
 	<main class="hero-section">
+		<div class="message" th:if="${session.success != null || session.error != null}">
+            <h3 style="color: green;" th:text="${session.success}"></h3>
+            <h3 style="color:red" th:text="${session.error}"></h3>
+            <th:block th:text="${@messageRemover.remove()}"></th:block>
+        </div>
+        
 		<h1 class="hero-title">Find Your Dream Job</h1>
 		<p class="hero-subtitle">Discover thousands of job opportunities with all the information you need. Its your
 			future.</p>
@@ -237,6 +262,17 @@
 			<p class="footer-text">© 2024 JobPortal. All rights reserved.</p>
 		</div>
 	</footer>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			const message = document.querySelector('.message');
+			if (message) {
+				setTimeout(function() {
+					message.style.display = 'none';
+				}, 2000);
+			}
+		});
+	</script>
 </body>
 
 </html>
