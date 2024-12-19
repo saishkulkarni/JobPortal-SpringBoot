@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Register</title>
+</head>
+<body>
+    <h1>Recruiter Registration</h1>
+    <div class="message" th:if="${session.success != null || session.error != null}">
+        <h3 style="color: green;" th:text="${session.success}"></h3>
+        <h3 style="color:red" th:text="${session.error}"></h3>
+        <th:block th:text="${@messageRemover.remove()}"></th:block>
+    </div>
+    <form action="/recruiter/register" method="post" th:object="${recruiter}">
+        Name: <input type="text" th:field="*{name}"><span th:errors="*{name}"></span><br>
+        Email: <input type="email" th:field="*{email}"><span th:errors="*{email}"></span><br>
+        Mobile: <input type="text" th:field="*{mobile}"><span th:errors="*{mobile}"></span><br>
+        Password: <input type="password" th:field="*{password}"><span th:errors="*{password}"></span><br>
+        Company Name: <input type="text" th:field="*{companyName}"><span th:errors="*{companyName}"></span><br>
+        Confirm Password: <input type="password" th:field="*{confirmPassword}"><span th:errors="*{confirmPassword}"></span><br>
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>

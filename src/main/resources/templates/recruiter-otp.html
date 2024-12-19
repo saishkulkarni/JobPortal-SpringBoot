@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Recruiter OTP</h1>
+    <div class="message" th:if="${session.success != null || session.error != null}">
+        <h3 style="color: green;" th:text="${session.success}"></h3>
+        <h3 style="color:red" th:text="${session.error}"></h3>
+        <th:block th:text="${@messageRemover.remove()}"></th:block>
+    </div>
+    <form action="/recruiter/otp" method="post">
+        <input type="text" name="otp" placeholder="Enter OTP">
+        <input type="hidden" name="id" th:value="${id}">
+        <button type="submit">Submit</button>
+    </form>
+    <a th:href="'/recruiter/resend-otp/'+${id}">Resend OTP</a>
+</body>
+</html>

@@ -45,12 +45,12 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Hello, <span th:text="${jobSeeker.name}"></span>!</h1>
+            <h1>Hello, <span th:text="${x.name}"></span>!</h1>
         </div>
         <div class="content">
             <p>Thank you for using our service. Please use the following OTP (One-Time Password) to verify your account:</p>
             <div class="otp">
-                <span th:text="${jobSeeker.otp}"></span>
+                <span th:text="${x.otp}"></span>
             </div>
             <p>This OTP is valid for a limited time. Please do not share this code with anyone.</p>
         </div>
