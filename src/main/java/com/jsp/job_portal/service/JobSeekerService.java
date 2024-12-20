@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 
 import com.jsp.job_portal.dto.JobSeeker;
+import com.jsp.job_portal.helper.AES;
 import com.jsp.job_portal.helper.MyEmailSender;
 import com.jsp.job_portal.repository.JobSeekerRepository;
 import com.jsp.job_portal.repository.RecruiterRepository;
@@ -47,9 +48,10 @@ public class JobSeekerService {
 		else {
 			jobSeeker.setOtp(new Random().nextInt(1000, 10000));
 			jobSeeker.setVerified(false);
+			jobSeeker.setPassword(AES.encrypt(jobSeeker.getPassword()));
 			seekerRepository.save(jobSeeker);
 			System.err.println(jobSeeker.getOtp());
-			emailSender.sendOtp(jobSeeker);
+			//emailSender.sendOtp(jobSeeker);
 			session.setAttribute("success", "Otp Sent Success!!!");
 			return "redirect:/jobseeker/otp/" + jobSeeker.getId();
 		}
@@ -74,7 +76,7 @@ public class JobSeekerService {
 		jobSeeker.setVerified(false);
 		seekerRepository.save(jobSeeker);
 		System.err.println(jobSeeker.getOtp());
-		emailSender.sendOtp(jobSeeker);
+		//emailSender.sendOtp(jobSeeker);
 		session.setAttribute("success", "OTP Resent Success");
 		return "redirect:/jobseeker/otp/" + jobSeeker.getId();
 	}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      class="message"
+      th:if="${session.success != null || session.error != null}"
+    >
+      <h3 style="color: green" th:text="${session.success}"></h3>
+      <h3 style="color: red" th:text="${session.error}"></h3>
+      <th:block th:text="${@messageRemover.remove()}"></th:block>
+    </div>
+    <h1>Recruiter Home</h1>
+    <a href="/logout"><button>Logout</button></a>
+  </body>
+</html>

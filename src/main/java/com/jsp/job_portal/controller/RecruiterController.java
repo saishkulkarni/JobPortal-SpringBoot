@@ -50,4 +50,13 @@ public class RecruiterController {
 		return recruiterService.resendOtp(id,session);
 	}
 	
+	@GetMapping("/home")
+	public String loadHome(HttpSession session) {
+		if (session.getAttribute("recruiter") != null) {
+			return "recruiter-home.html";
+		} else {
+			session.setAttribute("error", "Invalid Session, Login Again");
+			return "redirect:/login";
+		}
+	}
 }

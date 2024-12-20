@@ -20,31 +20,42 @@ import jakarta.validation.Valid;
 @RequestMapping("/jobseeker")
 public class JobSeekerController {
 	@Autowired
-	JobSeekerService seekerService; 
-	
+	JobSeekerService seekerService;
+
 	@GetMapping("/register")
-	public String loadRegister(JobSeeker jobSeeker,ModelMap map) {
-		return seekerService.register(jobSeeker,map);
+	public String loadRegister(JobSeeker jobSeeker, ModelMap map) {
+		return seekerService.register(jobSeeker, map);
 	}
-	
+
 	@PostMapping("/register")
-	public String register(@Valid JobSeeker jobSeeker,BindingResult result,HttpSession session) {
-		return seekerService.register(jobSeeker,result,session);
+	public String register(@Valid JobSeeker jobSeeker, BindingResult result, HttpSession session) {
+		return seekerService.register(jobSeeker, result, session);
 	}
-	
+
 	@GetMapping("/otp/{id}")
-	public String otp(@PathVariable("id") Integer id,ModelMap map) {
+	public String otp(@PathVariable("id") Integer id, ModelMap map) {
 		map.put("id", id);
 		return "seeker-otp.html";
 	}
-	
+
 	@PostMapping("/otp")
-	public String otp(@RequestParam("otp") int otp,@RequestParam("id") int id,HttpSession session) {
-		return seekerService.otp(otp,id,session);
+	public String otp(@RequestParam("otp") int otp, @RequestParam("id") int id, HttpSession session) {
+		return seekerService.otp(otp, id, session);
 	}
-	
+
 	@GetMapping("/resend-otp/{id}")
-	public String resendOtp(@PathVariable("id") Integer id,HttpSession session) {
-		return seekerService.resendOtp(id,session);
+	public String resendOtp(@PathVariable("id") Integer id, HttpSession session) {
+		return seekerService.resendOtp(id, session);
+	}
+
+	@GetMapping("/home")
+	public String loadHome(HttpSession session) {
+		if (session.getAttribute("jobSeeker") != null) {
+			return "jobseeker-home.html";
+		} else {
+			session.setAttribute("error", "Invalid Session, Login Again");
+			return "redirect:/login";
+		}
+
 	}
 }
