@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jsp.job_portal.dto.Job;
 import com.jsp.job_portal.dto.Recruiter;
+import com.jsp.job_portal.repository.JobRepository;
 import com.jsp.job_portal.service.RecruiterService;
 
 import jakarta.servlet.http.HttpSession;
@@ -23,33 +25,36 @@ public class RecruiterController {
 	@Autowired
 	RecruiterService recruiterService;
 
+	@Autowired
+	JobRepository jobRepository;
+
 	@GetMapping("/register")
 	public String loadRegister(Recruiter recruiter, ModelMap map) {
 		map.put("recruiter", recruiter);
 		return "recruiter-register.html";
 	}
-	
+
 	@PostMapping("/register")
-	public String register(@Valid Recruiter recruiter, BindingResult result,HttpSession session) {
-		return recruiterService.register(recruiter,result,session);
+	public String register(@Valid Recruiter recruiter, BindingResult result, HttpSession session) {
+		return recruiterService.register(recruiter, result, session);
 	}
-	
+
 	@GetMapping("/otp/{id}")
-	public String loadOtp(ModelMap map,@PathVariable("id") int id) {
+	public String loadOtp(ModelMap map, @PathVariable("id") int id) {
 		map.put("id", id);
 		return "recruiter-otp.html";
 	}
-	
+
 	@PostMapping("/otp")
-	public String otp(@RequestParam("id") int id,@RequestParam("otp") int otp,HttpSession session) {
-		return recruiterService.otp(id,otp,session);
+	public String otp(@RequestParam("id") int id, @RequestParam("otp") int otp, HttpSession session) {
+		return recruiterService.otp(id, otp, session);
 	}
-	
+
 	@GetMapping("/resend-otp/{id}")
-	public String resendOtp(@PathVariable("id") int id,HttpSession session) {
-		return recruiterService.resendOtp(id,session);
+	public String resendOtp(@PathVariable("id") int id, HttpSession session) {
+		return recruiterService.resendOtp(id, session);
 	}
-	
+
 	@GetMapping("/home")
 	public String loadHome(HttpSession session) {
 		if (session.getAttribute("recruiter") != null) {
@@ -59,4 +64,29 @@ public class RecruiterController {
 			return "redirect:/login";
 		}
 	}
+
+	@GetMapping("/post-job")
+	public String loadPostJob(HttpSession session) {
+		if (session.getAttribute("recruiter") != null) {
+			return "post-job.html";
+		} else {
+			session.setAttribute("error", "Invalid Session, Login Again");
+			return "redirect:/login";
+		}
+	}
+
+	@PostMapping("/post-job")
+	public String postJob(Job job, HttpSession session) {
+		if (session.getAttribute("recruiter") != null) {
+			Recruiter recruiter = (Recruiter) session.getAttribute("recruiter");
+			job.setRecruiter(recruiter);
+			jobRepository.save(job);
+			session.setAttribute("success", "Job Posted Success");
+			return "redirect:/recruiter/home";
+		} else {
+			session.setAttribute("error", "Invalid Session, Login Again");
+			return "redirect:/login";
+		}
+	}
+
 }
