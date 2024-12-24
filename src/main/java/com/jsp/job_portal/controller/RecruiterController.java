@@ -1,5 +1,7 @@
 package com.jsp.job_portal.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -88,5 +90,34 @@ public class RecruiterController {
 			return "redirect:/login";
 		}
 	}
+	
+	@GetMapping("/manage-jobs")
+	public String manageJob(HttpSession session,ModelMap map) {
+		if (session.getAttribute("recruiter") != null) {
+			Recruiter recruiter=(Recruiter) session.getAttribute("recruiter");
+			List<Job> jobs=jobRepository.findByRecruiter(recruiter);
+			if(jobs.isEmpty()) {
+				session.setAttribute("failure", "No Jobs Added Yet");
+				return "redirect:/recruiter/home";
+			}else {
+				map.put("jobs", jobs);
+				return "recruiter-jobs.html";
+			}
+		} else {
+			session.setAttribute("error", "Invalid Session, Login Again");
+			return "redirect:/login";
+		}
+	}
 
+	@GetMapping("/delete-job/{id}")
+	public String deleteJob(@PathVariable("id") int id,HttpSession session) {
+		if (session.getAttribute("recruiter") != null) {
+			jobRepository.deleteById(id);
+			session.setAttribute("error", "Job Removed Success");
+			return "redirect:/recruiter/manage-jobs";
+		} else {
+			session.setAttribute("error", "Invalid Session, Login Again");
+			return "redirect:/login";
+		}
+	}
 }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div align="center">
+      <div class="message" th:if="${session.success != null || session.error != null}">
+            <h3 style="color: green;" th:text="${session.success}"></h3>
+            <h3 style="color:red" th:text="${session.error}"></h3>
+            <th:block th:text="${@messageRemover.remove()}"></th:block>
+        </div>
+        <table border="1">
+            <tr>
+                <th>Company Name</th>
+                <th>Role</th>
+                <th>Package</th>
+                <th>Description</th>
+                <th>Experience Required</th>
+                <th>Skills Required</th>
+                <th>Location</th>
+                <th>Recruiter Name</th>
+                <th>Contact</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+
+            <tr th:each="job:${jobs}">
+                <th th:text="${job.recruiter.companyName}"></th>
+                <th th:text="${job.role}">Role</th>
+                <th th:text="${job.ctc}+' LPA'"></th>
+                <th th:text="${job.description}"></th>
+                <th th:text="${job.experience}+' months'"></th>
+                <th th:text="${job.skills}"></th>
+                <th th:text="${job.location}"></th>
+                <th th:text="${job.recruiter.name}"></th>
+                <th th:text="${job.recruiter.email}">Contact</th>
+                <th><button>Edit</button></th>
+                <th><a th:href="'/recruiter/delete-job/'+${job.id}"><button>Delete</button></a></th>
+            </tr>
+
+
+        </table>
+        <a href="/recruiter/home"><button>Home</button></a>
+    </div>
+</body>
+</html>
