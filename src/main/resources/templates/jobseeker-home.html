@@ -1,20 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div
-      class="message"
-      th:if="${session.success != null || session.error != null}"
-    >
-      <h3 style="color: green" th:text="${session.success}"></h3>
-      <h3 style="color: red" th:text="${session.error}"></h3>
-      <th:block th:text="${@messageRemover.remove()}"></th:block>
-    </div>
-    <h1>Job Seeker Home</h1>
-    <a href="/logout"><button>Logout</button></a>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Job Portal - Find your dream job">
+  <meta name="keywords" content="jobs, career, employment, job search">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+  <title>Job Portal - Job Seeker Home</title>
+  <style>
+      :root {
+          --primary-color: #2c3e50;
+          --secondary-color: #27ae60;
+          --accent-color: #3498db;
+          --text-light: #ecf0f1;
+          --text-dark: #2c3e50;
+          --border-color: #bdc3c7;
+      }
+
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: 'Inter', Arial, sans-serif;
+      }
+
+      html {
+          scroll-behavior: smooth;
+      }
+
+      body {
+          line-height: 1.6;
+      }
+
+      .navbar {
+          background-color: var(--primary-color);
+          padding: 1rem 2rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          position: fixed;
+          width: 100%;
+          top: 0;
+          z-index: 1000;
+      }
+
+      .logo {
+          color: white;
+          font-size: clamp(1.2rem, 2vw, 1.5rem);
+          font-weight: bold;
+      }
+
+      .logo a {
+          color: white;
+          text-decoration: none;
+      }
+
+      .nav-buttons {
+          display: flex;
+          gap: 1rem;
+      }
+
+      .nav-btn {
+          padding: 0.5rem 1.5rem;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-weight: bold;
+          transition: all 0.3s ease;
+      }
+
+      .register-btn {
+          background-color: var(--secondary-color);
+          color: white;
+      }
+
+      .login-btn {
+          background-color: transparent;
+          color: white;
+          border: 2px solid white;
+      }
+
+      .register-btn:hover {
+          background-color: #219a52;
+          transform: translateY(-2px);
+      }
+
+      .login-btn:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+          transform: translateY(-2px);
+      }
+
+      .alert-message {
+          position: fixed;
+          top: 100px;
+          right: 20px;
+          z-index: 1001;
+          padding: 1rem 2rem;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+          animation: slideIn 0.5s ease-out;
+          max-width: 400px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+
+      .alert-message.success {
+          background-color: #27ae60;
+          color: white;
+          border-left: 4px solid #219a52;
+      }
+
+      .alert-message.error {
+          background-color: #e74c3c;
+          color: white;
+          border-left: 4px solid #c0392b;
+      }
+
+      .alert-close {
+          background: none;
+          border: none;
+          color: white;
+          cursor: pointer;
+          margin-left: 10px;
+          font-size: 1.2rem;
+          padding: 0 5px;
+      }
+
+      .alert-close:hover {
+          opacity: 0.8;
+      }
+
+      @keyframes slideIn {
+          from {
+              transform: translateX(100%);
+              opacity: 0;
+          }
+          to {
+              transform: translateX(0);
+              opacity: 1;
+          }
+      }
+
+      .footer {
+          background-color: var(--primary-color);
+          color: white;
+          padding: 2rem;
+          text-align: center;
+          width: 100%;
+          position: fixed;
+          bottom: 0;
+      }
+
+      .footer-content {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 1rem;
+      }
+
+      .footer-links {
+          display: flex;
+          justify-content: center;
+          gap: 2rem;
+          margin-bottom: 1rem;
+          flex-wrap: wrap;
+      }
+
+      .footer-links a {
+          color: white;
+          text-decoration: none;
+          transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+          color: var(--accent-color);
+      }
+
+      .footer-text {
+          color: var(--border-color);
+          font-size: 0.9rem;
+      }
+
+      .content {
+          margin-top: 80px;
+          padding: 2rem;
+          text-align: center;
+      }
+
+      .content h1 {
+          margin-bottom: 2rem;
+          color: var(--text-dark);
+      }
+
+      .content button {
+          padding: 0.8rem 2rem;
+          margin: 0.5rem;
+          background-color: var(--accent-color);
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+      }
+
+      .content button:hover {
+          background-color: #2980b9;
+          transform: translateY(-2px);
+      }
+
+      @media (max-width: 768px) {
+          .footer {
+              padding: 1.5rem 1rem;
+          }
+
+          .footer-links {
+              gap: 1.5rem;
+          }
+      }
+
+      @media (max-width: 480px) {
+          .navbar {
+              padding: 1rem;
+          }
+
+          .nav-buttons {
+              gap: 0.5rem;
+          }
+
+          .nav-btn {
+              padding: 0.4rem 1rem;
+              font-size: 0.9rem;
+          }
+
+          .footer-links {
+              flex-direction: column;
+              gap: 1rem;
+          }
+      }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+      <div class="logo"><a href="/jobseeker/home">JobPortal</a></div>
+      <div class="nav-buttons">
+          <a href="/logout"><button class="nav-btn login-btn">Logout</button></a>
+      </div>
+  </nav>
+
+  <div class="content">
+      <div th:if="${session.success}" class="alert-message success">
+          <span th:text="${session.success}"></span>
+          <button class="alert-close" onclick="this.parentElement.style.display='none'">×</button>
+          <th:block th:text="${@messageRemover.remove()}"></th:block>
+      </div>
+      <div th:if="${session.error}" class="alert-message error">
+          <span th:text="${session.error}"></span>
+          <button class="alert-close" onclick="this.parentElement.style.display='none'">×</button>
+          <th:block th:text="${@messageRemover.remove()}"></th:block>
+      </div>
+
+      <h1>Job Seeker Home</h1>
+  </div>
+
+  <footer class="footer">
+      <div class="footer-content">
+          <div class="footer-links">
+              <a href="/about-us">About Us</a>
+              <a href="/contact">Contact</a>
+              <a href="/privacy-policy">Privacy Policy</a>
+              <a href="/terms">Terms of Service</a>
+          </div>
+          <p class="footer-text">© 2024 JobPortal. All rights reserved.</p>
+      </div>
+  </footer>
+
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const alerts = document.querySelectorAll('.alert-message');
+          alerts.forEach(alert => {
+              setTimeout(() => {
+                  alert.style.display = 'none';
+              }, 2000);
+          });
+      });
+  </script>
+</body>
 </html>

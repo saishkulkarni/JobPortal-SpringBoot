@@ -1,25 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post Job</title>
+    <meta name="description" content="Job Portal - Post a new job">
+    <meta name="keywords" content="jobs, career, employment, job posting">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+    <title>Job Portal - Post Job</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #27ae60;
+            --accent-color: #3498db;
+            --text-light: #ecf0f1;
+            --text-dark: #2c3e50;
+            --border-color: #bdc3c7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: white;
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            font-weight: bold;
+        }
+
+        .logo a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .register-btn {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .login-btn {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .register-btn:hover {
+            background-color: #219a52;
+            transform: translateY(-2px);
+        }
+
+        .login-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        label {
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        button[type="submit"] {
+            padding: 1rem 2rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            width: 100%;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-text {
+            color: var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1rem;
+            }
+
+            .footer {
+                padding: 1.5rem 1rem;
+            }
+
+            .footer-links {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .nav-buttons {
+                gap: 0.5rem;
+            }
+
+            .nav-btn {
+                padding: 0.4rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Post Job</h1>
-    <form action="/recruiter/post-job" method="post">
-        <label for="title">Job Role:</label>
-        <input type="text" name="role" id="title" required><br>
-        <label for="description">Job Description:</label>
-        <textarea name="description" id="description" required></textarea><br>
-        <label for="skills">Skills Required:</label>
-        <input type="text" name="skills" id="skills" required><br>
-        <label for="location">Location:</label>
-        <input type="text" name="location" id="location" required><br>
-        <label for="salary">CTC:</label>
-        <input type="number" name="ctc" id="salary" required><br>
-        <label for="experience">Experience:</label>
-        <input type="number" name="experience" id="experience" required><br>
-        <button type="submit">Post Job</button>
+    <nav class="navbar">
+        <div class="logo"><a href="/">JobPortal</a></div>
+        <div class="nav-buttons">
+            <a href="/login"><button class="nav-btn login-btn">Login</button></a>
+            <a href="/jobseeker/register"><button class="nav-btn register-btn">Register</button></a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1>Post Job</h1>
+        <form action="/recruiter/post-job" method="post">
+            <div>
+                <label for="title">Job Role:</label>
+                <input type="text" name="role" id="title" required>
+            </div>
+            <div>
+                <label for="description">Job Description:</label>
+                <textarea name="description" id="description" required></textarea>
+            </div>
+            <div>
+                <label for="skills">Skills Required:</label>
+                <input type="text" name="skills" id="skills" required>
+            </div>
+            <div>
+                <label for="location">Location:</label>
+                <input type="text" name="location" id="location" required>
+            </div>
+            <div>
+                <label for="salary">CTC:</label>
+                <input type="number" name="ctc" id="salary" required>
+            </div>
+            <div>
+                <label for="experience">Experience:</label>
+                <input type="number" name="experience" id="experience" required>
+            </div>
+            <button type="submit">Post Job</button>
+        </form>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/about-us">About Us</a>
+                <a href="/contact">Contact</a>
+                <a href="/privacy-policy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+            </div>
+            <p class="footer-text">© 2024 JobPortal. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
+
 </html>
