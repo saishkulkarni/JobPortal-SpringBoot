@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="message">
+        <h3 style="color: green;" th:text="${session.success}"></h3>
+        <h3 style="color:red" th:text="${session.error}"></h3>
+        <th:block th:text="${@messageRemover.remove()}"></th:block>
+    </div>
+    <h1>Admin Home Page</h1>
+
+    <a href="/admin/manage-jobs"><button>Manage Jobs</button></a>
+    <a href="/logout"><button>Logout</button></a>
+</body>
+</html>

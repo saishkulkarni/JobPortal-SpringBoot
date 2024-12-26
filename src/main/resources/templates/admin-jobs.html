@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin Jobs</title>
 </head>
 <body>
     <div align="center">
@@ -23,9 +23,7 @@
                 <th>Location</th>
                 <th>Recruiter Name</th>
                 <th>Contact</th>
-                <th>Status</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>Change Status</th>
             </tr>
 
             <tr th:each="job:${jobs}">
@@ -38,15 +36,13 @@
                 <th th:text="${job.location}"></th>
                 <th th:text="${job.recruiter.name}"></th>
                 <th th:text="${job.recruiter.email}">Contact</th>
-                <th th:if="${job.approved}">Approved</th>
-                <th th:if="${!job.approved}">Not Approved</th>
-                <th><button>Edit</button></th>
-                <th><a th:href="'/recruiter/delete-job/'+${job.id}"><button>Delete</button></a></th>
+                <th th:if="${job.approved}"><a th:href="'/admin/change/'+${job.id}"><button>Hide</button></a></th>
+                <th th:if="${!job.approved}"><a th:href="'/admin/change/'+${job.id}"><button>Display</button></a></th>
             </tr>
 
 
         </table>
-        <a href="/recruiter/home"><button>Home</button></a>
+        <a href="/admin/home"><button>Home</button></a>
     </div>
 </body>
 </html>
