@@ -1,5 +1,7 @@
 package com.jsp.job_portal.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jsp.job_portal.dto.Job;
 import com.jsp.job_portal.dto.JobSeeker;
+import com.jsp.job_portal.repository.JobRepository;
 import com.jsp.job_portal.service.JobSeekerService;
 
 import jakarta.servlet.http.HttpSession;
@@ -21,6 +25,9 @@ import jakarta.validation.Valid;
 public class JobSeekerController {
 	@Autowired
 	JobSeekerService seekerService;
+	
+	@Autowired
+	JobRepository jobRepository;
 
 	@GetMapping("/register")
 	public String loadRegister(JobSeeker jobSeeker, ModelMap map) {
@@ -58,4 +65,24 @@ public class JobSeekerController {
 		}
 
 	}
+	
+	@GetMapping("/view-jobs")
+	public String viewAllJobs(HttpSession session,ModelMap map) {
+		if (session.getAttribute("jobSeeker") != null) {
+			List<Job> jobs=jobRepository.findByApprovedTrue();
+			if(jobs.isEmpty()) {
+				session.setAttribute("error", "No Jobs Present Yet");
+				return "redirect:/jobseeker/home";
+			}else {
+				map.put("jobs", jobs);
+				return "jobseeker-jobs.html";
+			}
+			
+		} else {
+			session.setAttribute("error", "Invalid Session, Login Again");
+			return "redirect:/login";
+		}
+	}
+	
+	
 }

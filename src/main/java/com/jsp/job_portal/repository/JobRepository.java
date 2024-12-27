@@ -11,4 +11,10 @@ public interface JobRepository extends JpaRepository<Job, Integer> {
 
 	List<Job> findByRecruiter(Recruiter recruiter);
 
+	List<Job> findByApprovedTrue();
+
+	List<Job> findByRoleLike(String string);
+
+	List<Job> findBySkillsLike(String string);
+
 }

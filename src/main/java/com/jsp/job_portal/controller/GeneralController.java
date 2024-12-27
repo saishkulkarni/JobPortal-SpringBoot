@@ -1,5 +1,7 @@
 package com.jsp.job_portal.controller;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -166,7 +168,7 @@ public class GeneralController {
 		if (session.getAttribute("admin") != null) {
 			List<Job> jobs=jobRepository.findAll();
 			if(jobs.isEmpty()) {
-				session.setAttribute("failure", "No Jobs Added Yet");
+				session.setAttribute("error", "No Jobs Added Yet");
 				return "redirect:/admin/home";
 			}else {
 				map.put("jobs", jobs);
@@ -194,5 +196,23 @@ public class GeneralController {
 			session.setAttribute("error", "Invalid Session, Login Again");
 			return "redirect:/login";
 		}
+	}
+	
+	@PostMapping("/search-jobs")
+	public String viewJobs(@RequestParam("query") String query,HttpSession session,ModelMap map) {
+		List<Job> roleJobs=jobRepository.findByRoleLike("%"+query+"%");
+		List<Job> skillJobs=jobRepository.findBySkillsLike("%"+query+"%");
+		HashSet<Job> jobs=new HashSet<Job>();
+		jobs.addAll(skillJobs);
+		jobs.addAll(roleJobs);
+		
+		if(jobs.isEmpty()) {
+			session.setAttribute("error", "No Jobs Added Yet");
+			return "redirect:/jobseeker/home";
+		}else {
+			map.put("jobs", jobs);
+			return "search-jobs-result.html";
+		}
+		
 	}
 }

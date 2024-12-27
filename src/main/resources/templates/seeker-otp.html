@@ -122,7 +122,7 @@
 </head>
 
 <body>
-	<h1>Recruiter OTP</h1>
+	<h1>Job Seeker OTP</h1>
 	<div th:if="${session.success}" class="alert-message success">
 		<span th:text="${session.success}"></span>
 		<th:block th:text="${@messageRemover.remove()}"></th:block>
@@ -131,7 +131,7 @@
 		<span th:text="${session.error}"></span>
 		<th:block th:text="${@messageRemover.remove()}"></th:block>
 	</div>
-	<form action="/recruiter/otp" method="post">
+	<form action="/jobseeker/otp" method="post">
 		<input type="text" name="otp" placeholder="Enter OTP">
 		<input type="hidden" name="id" th:value="${id}">
 		<button type="submit">Submit</button>

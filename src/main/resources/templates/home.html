@@ -22,7 +22,7 @@
 			margin: 0;
 			padding: 0;
 			box-sizing: border-box;
-			font-family: 'Inter', Arial, sans-serif;
+			font-family: 'Playfair Display', 'Cormorant Garamond', 'Crimson Text', Georgia, serif;
 		}
 
 		html {
@@ -92,7 +92,7 @@
 		}
 
 		.hero-section {
-			min-height: 100vh;
+			min-height: 84vh;
 			background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
 			background-size: cover;
 			background-position: center;
@@ -206,7 +206,7 @@
 		.footer {
 			background-color: var(--primary-color);
 			color: white;
-			padding: 2rem;
+			padding: 1.4rem;
 			text-align: center;
 			width: 100%;
 		}
@@ -221,7 +221,7 @@
 			display: flex;
 			justify-content: center;
 			gap: 2rem;
-			margin-bottom: 1rem;
+			margin-bottom: 0.8rem;
 			flex-wrap: wrap;
 		}
 
@@ -251,7 +251,7 @@
 			}
 
 			.footer {
-				padding: 1.5rem 1rem;
+				padding: 1.1rem 1rem;
 			}
 
 			.footer-links {
@@ -305,8 +305,10 @@
 		<h1 class="hero-title">Find Your Dream Job</h1>
 		<p class="hero-subtitle">Discover thousands of job opportunities with all the information you need. Its your future.</p>
 		<div class="search-box">
-			<input type="text" class="search-input" placeholder="Job title or keyword">
+			<form action="/search-jobs" method="post">
+			<input type="text" name="query" class="search-input" placeholder="Job title or keyword">
 			<button class="search-btn">Search Jobs</button>
+			</form>
 		</div>
 	</main>
 

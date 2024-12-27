@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobSeeker Jobs</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #27ae60;
+            --accent-color: #3498db;
+            --text-light: #ecf0f1;
+            --text-dark: #2c3e50;
+            --border-color: #bdc3c7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            background-color: #f5f6fa;
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: white;
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            font-weight: bold;
+        }
+
+        .logo a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .content {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .job-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .job-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .job-detail {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .job-detail strong {
+            color: var(--text-dark);
+            min-width: 120px;
+        }
+
+        .status-btn {
+            width: 100%;
+            padding: 0.8rem;
+            margin-top: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--accent-color);
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .status-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .home-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-btn:hover {
+            background-color: #219a52;
+        }
+
+        .alert-message {
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .alert-message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .alert-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 1rem;
+            }
+            
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="/jobseeker/home">JobPortal JobSeeker</a></div>
+        <div class="nav-buttons">
+            <a href="/logout"><button class="nav-btn login-btn">Logout</button></a>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div th:if="${session.success}" class="alert-message success">
+            <span th:text="${session.success}"></span>
+            <th:block th:text="${@messageRemover.remove()}"></th:block>
+        </div>
+        <div th:if="${session.error}" class="alert-message error">
+            <span th:text="${session.error}"></span>
+            <th:block th:text="${@messageRemover.remove()}"></th:block>
+        </div>
+
+        <div class="jobs-grid">
+            <div class="job-card" th:each="job:${jobs}">
+                <h3 th:text="${job.role}">Role</h3>
+                <div class="job-detail">
+                    <strong>Company:</strong>
+                    <span th:text="${job.recruiter.companyName}"></span>
+                </div>
+                <div class="job-detail">
+                    <strong>Package:</strong>
+                    <span th:text="${job.ctc}+' LPA'"></span>
+                </div>
+                <div class="job-detail">
+                    <strong>Description:</strong>
+                    <span th:text="${job.description}"></span>
+                </div>
+                <div class="job-detail">
+                    <strong>Experience:</strong>
+                    <span th:text="${job.experience}+' months'"></span>
+                </div>
+                <div class="job-detail">
+                    <strong>Skills:</strong>
+                    <span th:text="${job.skills}"></span>
+                </div>
+                <div class="job-detail">
+                    <strong>Location:</strong>
+                    <span th:text="${job.location}"></span>
+                </div>
+                <div class="job-detail">
+                    <strong>Recruiter:</strong>
+                    <span th:text="${job.recruiter.name}"></span>
+                </div>
+                <div class="job-detail">
+                    <strong>Contact:</strong>
+                    <span th:text="${job.recruiter.email}"></span>
+                </div>
+                <a th:if="${session.jobSeeker}" href="">
+                    <button>Apply</button>
+                </a>
+                <a th:if="${session.jobSeeker==null}" href="/login">
+                    <button>Login</button>
+                </a>
+            </div>
+        </div>
+
+        <a href="/jobseeker/home" class="home-btn">Home</a>
+    </div>
+</body>
+</html>

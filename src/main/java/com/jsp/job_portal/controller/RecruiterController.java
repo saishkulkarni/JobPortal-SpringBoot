@@ -97,7 +97,7 @@ public class RecruiterController {
 			Recruiter recruiter=(Recruiter) session.getAttribute("recruiter");
 			List<Job> jobs=jobRepository.findByRecruiter(recruiter);
 			if(jobs.isEmpty()) {
-				session.setAttribute("failure", "No Jobs Added Yet");
+				session.setAttribute("error", "No Jobs Added Yet");
 				return "redirect:/recruiter/home";
 			}else {
 				map.put("jobs", jobs);
