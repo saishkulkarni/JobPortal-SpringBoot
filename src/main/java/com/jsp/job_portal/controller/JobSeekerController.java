@@ -83,6 +83,11 @@ public class JobSeekerController {
 			return "redirect:/login";
 		}
 	}
+
+	@GetMapping("/apply/{id}")
+	public String apply(@PathVariable("id") Integer id, HttpSession session) {
+		return seekerService.apply(id, session);
+	}
 	
 	
 }

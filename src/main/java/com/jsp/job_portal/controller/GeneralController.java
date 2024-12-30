@@ -1,6 +1,5 @@
 package com.jsp.job_portal.controller;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class GeneralController {
 	private String adminEmail;
 	@Value("${portal.admin.password}")
 	private String adminPassword;
-	
+
 	@Autowired
 	JobRepository jobRepository;
 
@@ -166,11 +165,11 @@ public class GeneralController {
 	@GetMapping("/admin/manage-jobs")
 	public String manageJobs(HttpSession session, ModelMap map) {
 		if (session.getAttribute("admin") != null) {
-			List<Job> jobs=jobRepository.findAll();
-			if(jobs.isEmpty()) {
+			List<Job> jobs = jobRepository.findAll();
+			if (jobs.isEmpty()) {
 				session.setAttribute("error", "No Jobs Added Yet");
 				return "redirect:/admin/home";
-			}else {
+			} else {
 				map.put("jobs", jobs);
 				return "admin-jobs.html";
 			}
@@ -179,40 +178,40 @@ public class GeneralController {
 			return "redirect:/login";
 		}
 	}
-	
+
 	@GetMapping("/admin/change/{id}")
-	public String changeStatus(@PathVariable("id") int id,HttpSession session) {
+	public String changeStatus(@PathVariable("id") int id, HttpSession session) {
 		if (session.getAttribute("admin") != null) {
-			Job job=jobRepository.findById(id).orElseThrow();
-			if(job.isApproved())
+			Job job = jobRepository.findById(id).orElseThrow();
+			if (job.isApproved())
 				job.setApproved(false);
 			else
 				job.setApproved(true);
-		
+
 			jobRepository.save(job);
 			session.setAttribute("success", "Status Changed Success");
 			return "redirect:/admin/manage-jobs";
-		}else {
+		} else {
 			session.setAttribute("error", "Invalid Session, Login Again");
 			return "redirect:/login";
 		}
 	}
-	
+
 	@PostMapping("/search-jobs")
-	public String viewJobs(@RequestParam("query") String query,HttpSession session,ModelMap map) {
-		List<Job> roleJobs=jobRepository.findByRoleLike("%"+query+"%");
-		List<Job> skillJobs=jobRepository.findBySkillsLike("%"+query+"%");
-		HashSet<Job> jobs=new HashSet<Job>();
+	public String viewJobs(@RequestParam("query") String query, HttpSession session, ModelMap map) {
+		List<Job> roleJobs = jobRepository.findByRoleLikeAndApprovedTrue("%" + query + "%");
+		List<Job> skillJobs = jobRepository.findBySkillsLikeAndApprovedTrue("%" + query + "%");
+		HashSet<Job> jobs = new HashSet<Job>();
 		jobs.addAll(skillJobs);
 		jobs.addAll(roleJobs);
-		
-		if(jobs.isEmpty()) {
+
+		if (jobs.isEmpty()) {
 			session.setAttribute("error", "No Jobs Added Yet");
 			return "redirect:/jobseeker/home";
-		}else {
+		} else {
 			map.put("jobs", jobs);
 			return "search-jobs-result.html";
 		}
-		
+
 	}
 }

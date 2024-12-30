@@ -13,8 +13,8 @@ public interface JobRepository extends JpaRepository<Job, Integer> {
 
 	List<Job> findByApprovedTrue();
 
-	List<Job> findByRoleLike(String string);
+	List<Job> findByRoleLikeAndApprovedTrue(String string);
 
-	List<Job> findBySkillsLike(String string);
+	List<Job> findBySkillsLikeAndApprovedTrue(String string);
 
 }

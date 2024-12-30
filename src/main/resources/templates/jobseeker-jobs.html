@@ -228,7 +228,7 @@
                     <strong>Contact:</strong>
                     <span th:text="${job.recruiter.email}"></span>
                 </div>
-                <a href="">
+                <a th:href="'/jobseeker/apply/'+${job.id}">
                     <button>Apply</button>
                 </a>
             </div>
