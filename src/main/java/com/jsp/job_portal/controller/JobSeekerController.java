@@ -11,9 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.jsp.job_portal.dto.Education;
+import com.jsp.job_portal.dto.Experience;
 import com.jsp.job_portal.dto.Job;
 import com.jsp.job_portal.dto.JobSeeker;
+import com.jsp.job_portal.helper.CloudinaryHelper;
 import com.jsp.job_portal.repository.JobRepository;
 import com.jsp.job_portal.service.JobSeekerService;
 
@@ -25,7 +30,10 @@ import jakarta.validation.Valid;
 public class JobSeekerController {
 	@Autowired
 	JobSeekerService seekerService;
-	
+
+	@Autowired
+	CloudinaryHelper cloudinaryHelper;
+
 	@Autowired
 	JobRepository jobRepository;
 
@@ -65,19 +73,19 @@ public class JobSeekerController {
 		}
 
 	}
-	
+
 	@GetMapping("/view-jobs")
-	public String viewAllJobs(HttpSession session,ModelMap map) {
+	public String viewAllJobs(HttpSession session, ModelMap map) {
 		if (session.getAttribute("jobSeeker") != null) {
-			List<Job> jobs=jobRepository.findByApprovedTrue();
-			if(jobs.isEmpty()) {
+			List<Job> jobs = jobRepository.findByApprovedTrue();
+			if (jobs.isEmpty()) {
 				session.setAttribute("error", "No Jobs Present Yet");
 				return "redirect:/jobseeker/home";
-			}else {
+			} else {
 				map.put("jobs", jobs);
 				return "jobseeker-jobs.html";
 			}
-			
+
 		} else {
 			session.setAttribute("error", "Invalid Session, Login Again");
 			return "redirect:/login";
@@ -88,6 +96,32 @@ public class JobSeekerController {
 	public String apply(@PathVariable("id") Integer id, HttpSession session) {
 		return seekerService.apply(id, session);
 	}
-	
-	
+
+	@GetMapping("/complete-profile")
+	public String completeProfile(HttpSession session) {
+		if (session.getAttribute("jobSeeker") != null) {
+			return "complete-profile.html";
+		} else {
+			session.setAttribute("error", "Invalid Session, Login Again");
+			return "redirect:/login";
+		}
+	}
+
+	@PostMapping("/complete-profile")
+	public String completeProfile(@RequestParam MultipartFile resume, @RequestParam MultipartFile profilePic,Experience experience,Education education,HttpSession session) {
+		if (session.getAttribute("jobSeeker") != null) {
+			JobSeeker jobSeeker=(JobSeeker) session.getAttribute("jobSeeker");
+			jobSeeker.setEducation(education);
+			jobSeeker.setExperience(experience);
+			jobSeeker.setResumeUrl(cloudinaryHelper.savePdf(resume));
+			jobSeeker.setProfilePicUrl(cloudinaryHelper.saveImage(profilePic));
+			jobSeeker.setCompleted(true);
+			seekerService.save(jobSeeker);
+			return "redirect:/login";
+		} else {
+			session.setAttribute("error", "Invalid Session, Login Again");
+			return "redirect:/login";
+		}
+	}
+
 }

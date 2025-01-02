@@ -261,6 +261,7 @@
       </div>
 
       <h1>Job Seeker Home</h1>
+      <a th:if="${!session.jobSeeker.completed}" href="/jobseeker/complete-profile"><button>Complete Your Profile</button></a>
 
       <a href="/jobseeker/view-jobs"><button>View All Jobs</button></a>
 

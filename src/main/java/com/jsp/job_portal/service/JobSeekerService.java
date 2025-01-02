@@ -130,4 +130,9 @@ public class JobSeekerService {
 		}
     }
 
+    public void save(JobSeeker jobSeeker) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'save'");
+    }
+
 }
