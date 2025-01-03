@@ -3,38 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Job Portal - Find your dream job">
-    <meta name="keywords" content="jobs, career, employment, job search">
+    <meta name="description" content="Job Portal - Terms of Service and Usage Guidelines">
+    <meta name="keywords" content="terms of service, terms and conditions, job portal, legal">
+    <meta name="author" content="Job Portal">
+    <meta name="robots" content="index, follow">
+
     <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <title>Job Portal - Terms of Service</title>
+
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #27ae60;
-            --accent-color: #3498db;
-            --text-light: #ecf0f1;
-            --text-dark: #2c3e50;
-            --border-color: #bdc3c7;
+            --primary-color: #1a73e8;
+            --secondary-color: #34a853;
+            --dark-color: #1f2937;
+            --light-color: #ffffff;
+            --gray-color: #f8f9fa;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', Arial, sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
             line-height: 1.6;
+            background-color: var(--gray-color);
         }
 
         .navbar {
-            background-color: var(--primary-color);
-            padding: 1rem 2rem;
+            background-color: rgba(255, 255, 255, 0.98);
+            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -42,196 +48,219 @@
             width: 100%;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
-            color: white;
-            font-size: clamp(1.2rem, 2vw, 1.5rem);
-            font-weight: bold;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .logo a {
-            color: white;
             text-decoration: none;
+            display: flex;
+            align-items: center;
         }
 
         .nav-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
+            align-items: center;
         }
 
         .nav-btn {
-            padding: 0.5rem 1.5rem;
+            padding: 0.8rem 2rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 500;
             transition: all 0.3s ease;
         }
 
         .register-btn {
-            background-color: var(--secondary-color);
+            background: var(--gradient);
             color: white;
         }
 
         .login-btn {
             background-color: transparent;
-            color: white;
-            border: 2px solid white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
         }
 
-        .register-btn:hover {
-            background-color: #219a52;
-            transform: translateY(-2px);
-        }
-
-        .login-btn:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .content-section {
-            margin-top: 80px;
-            padding: 2rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 100px;
-        }
-
-        .terms-title {
-            color: var(--text-dark);
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
+        .terms-section {
+            padding: 8rem 5% 4rem;
+            min-height: calc(100vh - 80px);
         }
 
         .terms-content {
-            color: #34495e;
-            line-height: 1.6;
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .terms-content h2 {
-            color: var(--text-dark);
-            margin: 1.5rem 0 1rem 0;
+        .terms-title {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .terms-content p {
-            margin-bottom: 1rem;
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--dark-color);
+            margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .terms-text {
+            color: var(--dark-color);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
         }
 
         .footer {
-            background-color: var(--primary-color);
+            background-color: var(--dark-color);
             color: white;
-            padding: 2rem;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            z-index: 1000;
+            padding: 1.3rem 5%;
         }
 
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1rem;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
+            gap: 3rem;
+            margin-bottom: 2rem;
         }
 
         .footer-links a {
             color: white;
             text-decoration: none;
             transition: color 0.3s ease;
+            position: relative;
         }
 
-        .footer-links a:hover {
-            color: var(--accent-color);
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
         }
 
-        .footer-text {
-            color: var(--border-color);
-            font-size: 0.9rem;
+        .footer-links a:hover::after {
+            width: 100%;
         }
 
         @media (max-width: 768px) {
+            .terms-section {
+                padding: 6rem 1rem 2rem;
+            }
+
+            .terms-content {
+                padding: 2rem;
+            }
+
             .terms-title {
                 font-size: 2rem;
             }
 
-            .footer {
-                padding: 1.5rem 1rem;
-            }
-
-            .footer-links {
-                gap: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .navbar {
-                padding: 1rem;
-            }
-
             .nav-buttons {
-                gap: 0.5rem;
+                gap: 1rem;
             }
 
             .nav-btn {
-                padding: 0.4rem 1rem;
-                font-size: 0.9rem;
+                padding: 0.6rem 1.5rem;
             }
 
             .footer-links {
                 flex-direction: column;
-                gap: 1rem;
+                align-items: center;
+                gap: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo"><a href="/">JobPortal</a></div>
+        <div class="logo">
+            <a href="/">
+                <img src="/assets/favicon.png" alt="Job Portal Logo" style="width: 30px; height: 30px; margin-right: 10px;">
+                Job Portal
+            </a>
+        </div>
         <div class="nav-buttons">
             <a href="/login"><button class="nav-btn login-btn">Login</button></a>
             <a href="/jobseeker/register"><button class="nav-btn register-btn">Register</button></a>
         </div>
     </nav>
 
-    <main class="content-section">
-        <h1 class="terms-title">Terms of Service</h1>
+    <section class="terms-section">
         <div class="terms-content">
-            <h2>1. Acceptance of Terms</h2>
-            <p>By accessing and using JobPortal, you accept and agree to be bound by the terms and provision of this agreement.</p>
+            <h1 class="terms-title">Terms of Service</h1>
+            <p class="terms-text">
+                Welcome to Job Portal. By accessing and using our platform, you agree to comply with and be bound by these terms and conditions.
+            </p>
 
-            <h2>2. User Registration</h2>
-            <p>To access certain features of the platform, you may be required to register for an account. You agree to provide accurate information during the registration process.</p>
+            <h2 class="section-title">1. Acceptance of Terms</h2>
+            <p class="terms-text">
+                By accessing and using Job Portal, you accept and agree to be bound by the terms and provisions of this agreement.
+            </p>
 
-            <h2>3. Privacy Policy</h2>
-            <p>Your use of JobPortal is also governed by our Privacy Policy. Please review our Privacy Policy, which also governs the site and informs users of our data collection practices.</p>
+            <h2 class="section-title">2. User Registration</h2>
+            <p class="terms-text">
+                To access certain features of the platform, you may be required to register for an account. You agree to provide accurate information during the registration process.
+            </p>
 
-            <h2>4. User Conduct</h2>
-            <p>You agree to use JobPortal only for lawful purposes and in a way that does not infringe the rights of, restrict or inhibit anyone else's use and enjoyment of the platform.</p>
+            <h2 class="section-title">3. Privacy Policy</h2>
+            <p class="terms-text">
+                Your use of Job Portal is also governed by our Privacy Policy. Please review our Privacy Policy, which also governs the site and informs users of our data collection practices.
+            </p>
 
-            <h2>5. Modifications</h2>
-            <p>We reserve the right to modify these terms at any time. We do so by posting and drawing attention to the updated terms on the site. Your continued use of JobPortal after changes to these terms confirms your acceptance of the updated terms.</p>
+            <h2 class="section-title">4. User Conduct</h2>
+            <p class="terms-text">
+                You agree to use Job Portal only for lawful purposes and in a way that does not infringe the rights of, restrict or inhibit anyone else's use and enjoyment of the platform.
+            </p>
+
+            <h2 class="section-title">5. Modifications</h2>
+            <p class="terms-text">
+                We reserve the right to modify these terms at any time. We do so by posting and drawing attention to the updated terms on the site. Your continued use of Job Portal after changes to these terms confirms your acceptance of the updated terms.
+            </p>
         </div>
-    </main>
+    </section>
 
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-links">
                 <a href="/about-us">About Us</a>
-                <a href="/contact">Contact</a>
                 <a href="/privacy-policy">Privacy Policy</a>
                 <a href="/terms">Terms of Service</a>
             </div>
-            <p class="footer-text">© 2024 JobPortal. All rights reserved.</p>
         </div>
     </footer>
 </body>

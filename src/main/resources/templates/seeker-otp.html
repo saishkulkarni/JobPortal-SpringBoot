@@ -1,142 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Job Portal - Find your dream job">
-	<meta name="keywords" content="jobs, career, employment, job search">
-	<link rel="icon" type="image/x-icon" href="/assets/favicon.png">
-	<title>Job Portal - Recruiter OTP</title>
-	<style>
-		:root {
-			--primary-color: #2c3e50;
-			--secondary-color: #27ae60;
-			--accent-color: #3498db;
-			--text-light: #ecf0f1;
-			--text-dark: #2c3e50;
-			--border-color: #bdc3c7;
-		}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Job Portal - Verify your account">
+    <meta name="keywords" content="otp verification, job portal, account verification">
+    <meta name="author" content="Job Portal">
+    <meta name="robots" content="index, follow">
 
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-			font-family: 'Inter', Arial, sans-serif;
-		}
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-		html {
-			scroll-behavior: smooth;
-		}
+    <title>Job Portal - OTP Verification</title>
 
-		body {
-			line-height: 1.6;
-			min-height: 100vh;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			padding: 2rem;
-			background-color: #f5f6fa;
-		}
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #34a853;
+            --dark-color: #1f2937;
+            --light-color: #ffffff;
+            --gray-color: #f8f9fa;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
 
-		h1 {
-			color: var(--primary-color);
-			margin-bottom: 2rem;
-			text-align: center;
-		}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-		.alert-message {
-			padding: 1rem 2rem;
-			border-radius: 8px;
-			margin-bottom: 2rem;
-			box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-			max-width: 400px;
-			text-align: center;
-		}
+        body {
+            line-height: 1.6;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-		.alert-message.success {
-			background-color: #27ae60;
-			color: white;
-			border-left: 4px solid #219a52;
-		}
+        .otp-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
 
-		.alert-message.error {
-			background-color: #e74c3c;
-			color: white;
-			border-left: 4px solid #c0392b;
-		}
+        .otp-title {
+            font-size: 2rem;
+            color: var(--dark-color);
+            margin-bottom: 2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-		form {
-			display: flex;
-			flex-direction: column;
-			gap: 1rem;
-			width: 100%;
-			max-width: 400px;
-		}
+        .alert-message {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
 
-		input[type="text"] {
-			padding: 0.8rem;
-			border: 1px solid var(--border-color);
-			border-radius: 5px;
-			font-size: 1rem;
-		}
+        .success {
+            background-color: rgba(52, 168, 83, 0.1);
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+        }
 
-		button {
-			padding: 0.8rem 2rem;
-			background-color: var(--accent-color);
-			color: white;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-			transition: all 0.3s ease;
-			font-weight: bold;
-		}
+        .error {
+            background-color: rgba(234, 67, 53, 0.1);
+            color: #ea4335;
+            border: 1px solid #ea4335;
+        }
 
-		button:hover {
-			background-color: #2980b9;
-			transform: translateY(-2px);
-		}
+        .otp-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
 
-		a {
-			color: var(--accent-color);
-			text-decoration: none;
-			margin-top: 1rem;
-			transition: color 0.3s ease;
-		}
+        .otp-input {
+            padding: 1rem 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            text-align: center;
+            letter-spacing: 4px;
+            transition: all 0.3s ease;
+        }
 
-		a:hover {
-			color: #2980b9;
-		}
+        .otp-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+        }
 
-		@media (max-width: 480px) {
-			body {
-				padding: 1rem;
-			}
+        .submit-btn {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-			form {
-				width: 90%;
-			}
-		}
-	</style>
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 115, 232, 0.4);
+        }
+
+        .resend-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .resend-link:hover {
+            color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 480px) {
+            .otp-container {
+                padding: 2rem;
+            }
+
+            .otp-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
-	<h1>Job Seeker OTP</h1>
-	<div th:if="${session.success}" class="alert-message success">
-		<span th:text="${session.success}"></span>
-		<th:block th:text="${@messageRemover.remove()}"></th:block>
-	</div>
-	<div th:if="${session.error}" class="alert-message error">
-		<span th:text="${session.error}"></span>
-		<th:block th:text="${@messageRemover.remove()}"></th:block>
-	</div>
-	<form action="/jobseeker/otp" method="post">
-		<input type="text" name="otp" placeholder="Enter OTP">
-		<input type="hidden" name="id" th:value="${id}">
-		<button type="submit">Submit</button>
-	</form>
-	<a th:href="'/recruiter/resend-otp/'+${id}">Resend OTP</a>
-</body>
+    <div class="otp-container">
+        <h1 class="otp-title">Verify Your Account</h1>
+        
+        <div th:if="${session.success}" class="alert-message success">
+            <span th:text="${session.success}"></span>
+            <th:block th:text="${@messageRemover.remove()}"></th:block>
+        </div>
+        <div th:if="${session.error}" class="alert-message error">
+            <span th:text="${session.error}"></span>
+            <th:block th:text="${@messageRemover.remove()}"></th:block>
+        </div>
 
+        <form action="/jobseeker/otp" method="post" class="otp-form">
+            <input type="text" name="otp" class="otp-input" placeholder="Enter OTP" maxlength="6" required>
+            <input type="hidden" name="id" th:value="${id}">
+            <button type="submit" class="submit-btn">Verify OTP</button>
+        </form>
+
+        <a th:href="'/jobseeker/resend-otp/'+${id}" class="resend-link">Resend OTP</a>
+    </div>
+</body>
 </html>

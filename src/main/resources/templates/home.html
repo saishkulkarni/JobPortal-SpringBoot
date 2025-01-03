@@ -1,262 +1,385 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Job Portal - Find your dream job" />
-    <meta name="keywords" content="jobs, career, employment, job search" />
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.png" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <title>Job Portal - Home</title>
-    <style>
-      :root {
-        --primary-color: #1a73e8;
-        --secondary-color: #34a853;
-        --dark-color: #1f2937;
-        --light-color: #ffffff;
-        --gradient: linear-gradient(135deg, #1a73e8, #34a853);
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Job Portal - Find your dream job opportunities across various industries">
+  <meta name="keywords" content="jobs, career, employment, job search, job portal, hiring, job opportunities">
+  <meta name="author" content="Job Portal">
+  <meta name="robots" content="index, follow">
+
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <title>Job Portal - Find Your Dream Job Today</title>
+
+  <style>
+    :root {
+      --primary-color: #1a73e8;
+      --secondary-color: #34a853;
+      --dark-color: #1f2937;
+      --light-color: #ffffff;
+      --gray-color: #f8f9fa;
+      --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      line-height: 1.6;
+      background-color: var(--gray-color);
+    }
+
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.98);
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo a {
+      text-decoration: none;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-btn {
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .register-btn {
+      background: var(--gradient);
+      color: white;
+    }
+
+    .register-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(26, 115, 232, 0.4);
+    }
+
+    .login-btn {
+      background-color: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+    }
+
+    .login-btn:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .hero-section {
+      min-height: 90vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
       }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-title {
+      color: white;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-subtitle {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+    }
+
+    .search-box {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 700px;
+      display: flex;
+      gap: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+    }
+
+    .search-btn {
+      padding: 1rem 2.5rem;
+      background: var(--gradient);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .alert-message {
+      position: fixed;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      z-index: 1001;
+      animation: slideDown 0.5s ease-out;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .alert-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0 0.5rem;
+      color: inherit;
+      opacity: 0.7;
+    }
+
+    .alert-close:hover {
+      opacity: 1;
+    }
+
+    @keyframes slideDown {
+      from {
+        top: -100px;
+        opacity: 0;
       }
 
-      body {
-        line-height: 1.6;
-        background-color: #f8f9fa;
+      to {
+        top: 100px;
+        opacity: 1;
       }
+    }
 
-      .navbar {
-        background-color: rgba(255, 255, 255, 0.95);
-        padding: 1rem 5%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: fixed;
-        width: 100%;
-        top: 0;
-        z-index: 1000;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
+    .search-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(26, 115, 232, 0.4);
+    }
 
-      .logo {
-        font-size: 1.8rem;
-        font-weight: 700;
-        background: var(--gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
+    .footer {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 1.3rem 5%;
+    }
 
-      .logo a {
-        text-decoration: none;
-      }
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-      .nav-buttons {
-        display: flex;
-        gap: 1.5rem;
-      }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
 
-      .nav-btn {
-        padding: 0.8rem 2rem;
-        border: none;
-        border-radius: 25px;
-        cursor: pointer;
-        font-weight: 500;
-        transition: all 0.3s ease;
-      }
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      position: relative;
+    }
 
-      .register-btn {
-        background: var(--gradient);
-        color: white;
-      }
+    .footer-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--primary-color);
+      transition: width 0.3s ease;
+    }
 
-      .login-btn {
-        background-color: transparent;
-        color: var(--primary-color);
-        border: 2px solid var(--primary-color);
-      }
+    .footer-links a:hover::after {
+      width: 100%;
+    }
 
-      .hero-section {
-        min-height: 100vh;
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-          url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80");
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 0 1rem;
-      }
-
-      .hero-content {
-        max-width: 800px;
-        margin: 0 auto;
-      }
-
+    @media (max-width: 768px) {
       .hero-title {
-        color: white;
-        font-size: 3.5rem;
-        font-weight: 700;
-        margin-bottom: 1.5rem;
-        line-height: 1.2;
-      }
-
-      .hero-subtitle {
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 1.2rem;
-        margin-bottom: 3rem;
+        font-size: 2.5rem;
       }
 
       .search-box {
-        background: white;
-        padding: 1.5rem;
-        border-radius: 15px;
-        width: 100%;
-        max-width: 700px;
-        display: flex;
+        flex-direction: column;
+      }
+
+      .nav-buttons {
         gap: 1rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       }
 
-      .search-input {
-        flex: 1;
-        padding: 1rem 1.5rem;
-        border: 2px solid #e0e0e0;
-        border-radius: 10px;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-      }
-
-      .search-input:focus {
-        border-color: var(--primary-color);
-        outline: none;
-      }
-
-      .search-btn {
-        padding: 1rem 2.5rem;
-        background: var(--gradient);
-        color: white;
-        border: none;
-        border-radius: 10px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .search-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(26, 115, 232, 0.4);
-      }
-
-      .footer {
-        background-color: var(--dark-color);
-        color: white;
-        padding: 3rem 5%;
-      }
-
-      .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
+      .nav-btn {
+        padding: 0.6rem 1.5rem;
       }
 
       .footer-links {
-        display: flex;
-        justify-content: center;
-        gap: 3rem;
-        margin-bottom: 2rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
       }
+    }
+  </style>
+</head>
 
-      .footer-links a {
-        color: white;
-        text-decoration: none;
-        transition: color 0.3s ease;
-      }
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <a href="/" style="display: flex; align-items: center;">
+        <img src="/assets/favicon.png" alt="Job Portal Logo" style="width: 30px; height: 30px; margin-right: 10px;">
+        Job Portal
+      </a>
+    </div>
+    <div class="nav-buttons">
+      <a href="/login"><button class="nav-btn login-btn">Login</button></a>
+      <a href="/jobseeker/register"><button class="nav-btn register-btn">Register</button></a>
+    </div>
+  </nav>
 
-      .footer-links a:hover {
-        color: var(--primary-color);
-      }
+  <div th:if="${session.success}" class="alert-message success">
+    <span th:text="${session.success}"></span>
+    <button class="alert-close" onclick="this.parentElement.style.display='none'">×</button>
+    <th:block th:text="${@messageRemover.remove()}"></th:block>
+  </div>
+  <div th:if="${session.error}" class="alert-message error">
+    <span th:text="${session.error}"></span>
+    <button class="alert-close" onclick="this.parentElement.style.display='none'">×</button>
+    <th:block th:text="${@messageRemover.remove()}"></th:block>
+  </div>
 
-      .alert-message {
-        position: fixed;
-        top: 100px;
-        right: 20px;
-        z-index: 1001;
-        padding: 1rem 2rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        animation: slideIn 0.5s ease-out;
-      }
 
-      @media (max-width: 768px) {
-        .hero-title {
-          font-size: 2.5rem;
-        }
-
-        .search-box {
-          flex-direction: column;
-        }
-
-        .nav-buttons {
-          gap: 1rem;
-        }
-
-        .nav-btn {
-          padding: 0.6rem 1.5rem;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <nav class="navbar">
-      <div class="logo">
-        <a href="/">Job Portal</a>
-      </div>
-      <div class="nav-buttons">
-        <a href="/login"><button class="nav-btn login-btn">Login</button></a>
-        <a href="/jobseeker/register"
-          ><button class="nav-btn register-btn">Register</button></a
-        >
-      </div>
-    </nav>
-
-    <section class="hero-section">
-      <div class="hero-content">
-        <h1 class="hero-title">Find Your Dream Job Today</h1>
-        <p class="hero-subtitle">
-          Search through thousands of job listings to find your perfect match
-        </p>
-        <form action="/search-jobs" method="post">
-          <div class="search-box">
-            <input
-              type="text"
-              class="search-input"
-              name="query"
-              placeholder="Search jobs..."
-            />
-            <button class="search-btn">Search</button>
-          </div>
-        </form>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-links">
-          <a href="/about-us">About Us</a>
-          <a href="/contact">Contact</a>
-          <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/terms">Terms of Service</a>
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Find Your Dream Job Today</h1>
+      <p class="hero-subtitle">Search through thousands of job listings to find your perfect match</p>
+      <form action="/search-jobs" method="post">
+        <div class="search-box">
+          <input type="text" class="search-input" name="query" placeholder="Search jobs..." required>
+          <button type="submit" class="search-btn">
+            <i class="fas fa-search"></i>
+            Search
+          </button>
         </div>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="/about-us">About Us</a>
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
       </div>
-    </footer>
-  </body>
+    </div>
+  </footer>
+  <script>
+    setTimeout(function () {
+      const alertMessages = document.querySelectorAll('.alert-message');
+      alertMessages.forEach(message => {
+        message.style.display = 'none';
+      });
+    }, 2000);
+  </script>
+</body>
+
 </html>
+</div>

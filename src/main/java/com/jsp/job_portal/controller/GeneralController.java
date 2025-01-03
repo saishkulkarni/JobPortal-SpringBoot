@@ -49,11 +49,6 @@ public class GeneralController {
 		return "about-us.html";
 	}
 
-	@GetMapping("/contact")
-	public String contact() {
-		return "contact.html";
-	}
-
 	@GetMapping("/privacy-policy")
 	public String services() {
 		return "privacy-policy.html";

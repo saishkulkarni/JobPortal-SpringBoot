@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jsp.job_portal.dto.Education;
@@ -108,9 +107,10 @@ public class JobSeekerController {
 	}
 
 	@PostMapping("/complete-profile")
-	public String completeProfile(@RequestParam MultipartFile resume, @RequestParam MultipartFile profilePic,Experience experience,Education education,HttpSession session) {
+	public String completeProfile(@RequestParam MultipartFile resume, @RequestParam MultipartFile profilePic,
+			Experience experience, Education education, HttpSession session) {
 		if (session.getAttribute("jobSeeker") != null) {
-			JobSeeker jobSeeker=(JobSeeker) session.getAttribute("jobSeeker");
+			JobSeeker jobSeeker = (JobSeeker) session.getAttribute("jobSeeker");
 			jobSeeker.setEducation(education);
 			jobSeeker.setExperience(experience);
 			jobSeeker.setResumeUrl(cloudinaryHelper.savePdf(resume));

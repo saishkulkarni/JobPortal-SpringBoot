@@ -4,38 +4,45 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Job Portal - Find your dream job">
-	<meta name="keywords" content="jobs, career, employment, job search">
+	<meta name="description" content="Job Portal - Learn about our mission and team">
+	<meta name="keywords" content="jobs, career, employment, job portal, about us, team">
+	<meta name="author" content="Job Portal">
+	<meta name="robots" content="index, follow">
+
 	<link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 	<title>Job Portal - About Us</title>
+
 	<style>
 		:root {
-			--primary-color: #2c3e50;
-			--secondary-color: #27ae60;
-			--accent-color: #3498db;
-			--text-light: #ecf0f1;
-			--text-dark: #2c3e50;
-			--border-color: #bdc3c7;
+			--primary-color: #1a73e8;
+			--secondary-color: #34a853;
+			--dark-color: #1f2937;
+			--light-color: #ffffff;
+			--gray-color: #f8f9fa;
+			--gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
 		}
 
 		* {
 			margin: 0;
 			padding: 0;
 			box-sizing: border-box;
-			font-family: 'Inter', Arial, sans-serif;
-		}
-
-		html {
-			scroll-behavior: smooth;
+			font-family: 'Poppins', sans-serif;
 		}
 
 		body {
 			line-height: 1.6;
+			background-color: var(--gray-color);
 		}
 
 		.navbar {
-			background-color: var(--primary-color);
-			padding: 1rem 2rem;
+			background-color: rgba(255, 255, 255, 0.98);
+			padding: 1rem 5%;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -43,198 +50,156 @@
 			width: 100%;
 			top: 0;
 			z-index: 1000;
+			box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 		}
 
 		.logo {
-			color: white;
-			font-size: clamp(1.2rem, 2vw, 1.5rem);
-			font-weight: bold;
+			font-size: 1.8rem;
+			font-weight: 700;
+			background: var(--gradient);
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+			transition: transform 0.3s ease;
+		}
+
+		.logo:hover {
+			transform: scale(1.05);
 		}
 
 		.logo a {
-			color: white;
 			text-decoration: none;
+			display: flex;
+			align-items: center;
 		}
 
 		.nav-buttons {
 			display: flex;
-			gap: 1rem;
+			gap: 1.5rem;
+			align-items: center;
 		}
 
 		.nav-btn {
-			padding: 0.5rem 1.5rem;
+			padding: 0.8rem 2rem;
 			border: none;
-			border-radius: 5px;
+			border-radius: 25px;
 			cursor: pointer;
-			font-weight: bold;
+			font-weight: 500;
 			transition: all 0.3s ease;
 		}
 
 		.register-btn {
-			background-color: var(--secondary-color);
+			background: var(--gradient);
 			color: white;
 		}
 
 		.login-btn {
 			background-color: transparent;
-			color: white;
-			border: 2px solid white;
-		}
-
-		.register-btn:hover {
-			background-color: #219a52;
-			transform: translateY(-2px);
-		}
-
-		.login-btn:hover {
-			background-color: rgba(255, 255, 255, 0.1);
-			transform: translateY(-2px);
+			color: var(--primary-color);
+			border: 2px solid var(--primary-color);
 		}
 
 		.about-section {
-			padding-top: 80px;
-			min-height: 100vh;
-			background-color: #f5f6fa;
+			padding: 8rem 5% 4rem;
+			min-height: 90vh;
 		}
 
 		.about-content {
-			max-width: 800px;
-			margin: 2rem auto;
-			padding: 2rem;
-			background-color: white;
-			border-radius: 10px;
-			box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+			max-width: 1200px;
+			margin: 0 auto;
+			background: white;
+			padding: 5rem;
+			border-radius: 20px;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 		}
 
 		.about-title {
-			color: #2c3e50;
 			font-size: 2.5rem;
-			margin-bottom: 1.5rem;
+			color: var(--dark-color);
+			margin-bottom: 2rem;
 			text-align: center;
+			background: var(--gradient);
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
 		}
 
 		.about-text {
-			color: #34495e;
-			line-height: 1.6;
-			margin-bottom: 1.5rem;
-		}
-
-		.team-section {
-			margin-top: 3rem;
-		}
-
-		.team-title {
-			color: #2c3e50;
-			font-size: 1.8rem;
-			margin-bottom: 1.5rem;
-			text-align: center;
-		}
-
-		.team-grid {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-			gap: 2rem;
-			margin-top: 2rem;
-		}
-
-		.team-member {
-			text-align: center;
-		}
-
-		.team-member img {
-			width: 150px;
-			height: 150px;
-			border-radius: 50%;
-			margin-bottom: 1rem;
-			object-fit: cover;
-		}
-
-		.team-member h3 {
-			color: #2c3e50;
-			margin-bottom: 0.5rem;
-		}
-
-		.team-member p {
-			color: #7f8c8d;
+			color: var(--dark-color);
+			font-size: 1.1rem;
+			margin-bottom: 2rem;
+			line-height: 1.8;
 		}
 
 		.footer {
-			background-color: var(--primary-color);
+			background-color: var(--dark-color);
 			color: white;
-			padding: 2rem;
-			text-align: center;
-			width: 100%;
+			padding: 1.3rem 5%;
 		}
 
 		.footer-content {
 			max-width: 1200px;
 			margin: 0 auto;
-			padding: 0 1rem;
 		}
 
 		.footer-links {
 			display: flex;
 			justify-content: center;
-			gap: 2rem;
-			margin-bottom: 1rem;
-			flex-wrap: wrap;
+			gap: 3rem;
+			margin-bottom: 2rem;
 		}
 
 		.footer-links a {
 			color: white;
 			text-decoration: none;
 			transition: color 0.3s ease;
+			position: relative;
 		}
 
-		.footer-links a:hover {
-			color: var(--accent-color);
+		.footer-links a::after {
+			content: '';
+			position: absolute;
+			width: 0;
+			height: 2px;
+			bottom: -5px;
+			left: 0;
+			background-color: var(--primary-color);
+			transition: width 0.3s ease;
 		}
 
-		.footer-text {
-			color: var(--border-color);
-			font-size: 0.9rem;
+		.footer-links a:hover::after {
+			width: 100%;
 		}
 
 		@media (max-width: 768px) {
+			.about-section {
+				padding: 6rem 1rem 2rem;
+			}
+
+			.about-content {
+				padding: 2rem;
+			}
+
 			.about-title {
 				font-size: 2rem;
 			}
 
-			.about-content {
-				margin: 1rem;
-				padding: 1rem;
-			}
-
 			.team-grid {
-				grid-template-columns: 1fr;
-			}
-
-			.footer {
-				padding: 1.5rem 1rem;
-			}
-
-			.footer-links {
-				gap: 1.5rem;
-			}
-		}
-
-		@media (max-width: 480px) {
-			.navbar {
-				padding: 1rem;
+				gap: 2rem;
 			}
 
 			.nav-buttons {
-				gap: 0.5rem;
+				gap: 1rem;
 			}
 
 			.nav-btn {
-				padding: 0.4rem 1rem;
-				font-size: 0.9rem;
+				padding: 0.6rem 1.5rem;
 			}
 
 			.footer-links {
 				flex-direction: column;
-				gap: 1rem;
+				align-items: center;
+				gap: 1.5rem;
 			}
 		}
 	</style>
@@ -242,58 +207,42 @@
 
 <body>
 	<nav class="navbar">
-		<div class="logo"><a href="/">JobPortal</a></div>
+		<div class="logo">
+			<a href="/">
+				<img src="/assets/favicon.png" alt="Job Portal Logo"
+					style="width: 30px; height: 30px; margin-right: 10px;">
+				Job Portal
+			</a>
+		</div>
 		<div class="nav-buttons">
 			<a href="/login"><button class="nav-btn login-btn">Login</button></a>
 			<a href="/jobseeker/register"><button class="nav-btn register-btn">Register</button></a>
 		</div>
 	</nav>
 
-	<main class="about-section">
+	<section class="about-section">
 		<div class="about-content">
 			<h1 class="about-title">About Us</h1>
 			<p class="about-text">
-				Welcome to JobPortal, your trusted partner in career development and job searching. We are committed to
+				Welcome to Job Portal, your trusted partner in career development and job searching. We are committed to
 				connecting talented professionals with outstanding employment opportunities across various industries.
 			</p>
 			<p class="about-text">
-				Our platform was founded with a simple mission: to make the job search process easier, more transparent,
-				and more effective for both job seekers and employers. We leverage cutting-edge technology and industry
-				expertise to create meaningful connections in the job market.
+				Our platform leverages cutting-edge technology and industry expertise to create meaningful connections
+				in the job market. We believe in making the job search process easier, more transparent, and more
+				effective for both job seekers and employers.
 			</p>
 
-			<div class="team-section">
-				<h2 class="team-title">Our Team</h2>
-				<div class="team-grid">
-					<div class="team-member">
-						<img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Team Member">
-						<h3>John Doe</h3>
-						<p>CEO & Founder</p>
-					</div>
-					<div class="team-member">
-						<img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Team Member">
-						<h3>Jane Smith</h3>
-						<p>Head of Operations</p>
-					</div>
-					<div class="team-member">
-						<img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Team Member">
-						<h3>Mike Johnson</h3>
-						<p>Technical Lead</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</main>
+
+	</section>
 
 	<footer class="footer">
 		<div class="footer-content">
 			<div class="footer-links">
-				<a href="/about-us">About Us</a>
-				<a href="/contact">Contact</a>
+				<a href="/home">Home</a>
 				<a href="/privacy-policy">Privacy Policy</a>
 				<a href="/terms">Terms of Service</a>
 			</div>
-			<p class="footer-text">© 2024 JobPortal. All rights reserved.</p>
 		</div>
 	</footer>
 </body>
