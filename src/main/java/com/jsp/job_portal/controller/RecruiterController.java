@@ -120,4 +120,30 @@ public class RecruiterController {
 			return "redirect:/login";
 		}
 	}
+
+	@GetMapping("/edit-job/{id}")
+	public String editJob(@PathVariable("id") int id,ModelMap map,HttpSession session) {
+		if (session.getAttribute("recruiter") != null) {
+			Job job=jobRepository.findById(id).get();
+			map.put("job", job);
+			return "edit-job.html";
+		} else {
+			session.setAttribute("error", "Invalid Session, Login Again");
+			return "redirect:/login";
+		}
+	}
+
+	@PostMapping("/update-job")
+	public String updateJob(Job job, HttpSession session) {
+		if (session.getAttribute("recruiter") != null) {
+			Recruiter recruiter = (Recruiter) session.getAttribute("recruiter");
+			job.setRecruiter(recruiter);
+			jobRepository.save(job);
+			session.setAttribute("success", "Job Updated Success");
+			return "redirect:/recruiter/manage-jobs";
+		} else {
+			session.setAttribute("error", "Invalid Session, Login Again");
+			return "redirect:/login";
+		}
+	}
 }
