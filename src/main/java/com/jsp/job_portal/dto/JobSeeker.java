@@ -48,12 +48,11 @@ public class JobSeeker {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<JobApplication> jobApplications = new ArrayList<>();
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	Education education;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	Experience experience;
-
 
 	private String resumeUrl;
 	private String profilePicUrl;

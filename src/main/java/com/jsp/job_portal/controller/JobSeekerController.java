@@ -19,6 +19,7 @@ import com.jsp.job_portal.dto.Job;
 import com.jsp.job_portal.dto.JobSeeker;
 import com.jsp.job_portal.helper.CloudinaryHelper;
 import com.jsp.job_portal.repository.JobRepository;
+import com.jsp.job_portal.repository.JobSeekerRepository;
 import com.jsp.job_portal.service.JobSeekerService;
 
 import jakarta.servlet.http.HttpSession;
@@ -29,6 +30,9 @@ import jakarta.validation.Valid;
 public class JobSeekerController {
 	@Autowired
 	JobSeekerService seekerService;
+
+	@Autowired
+	JobSeekerRepository jobSeekerRepository;
 
 	@Autowired
 	CloudinaryHelper cloudinaryHelper;
@@ -116,8 +120,9 @@ public class JobSeekerController {
 			jobSeeker.setResumeUrl(cloudinaryHelper.savePdf(resume));
 			jobSeeker.setProfilePicUrl(cloudinaryHelper.saveImage(profilePic));
 			jobSeeker.setCompleted(true);
-			seekerService.save(jobSeeker);
-			return "redirect:/login";
+			jobSeekerRepository.save(jobSeeker);
+			session.setAttribute("success", "Profile Completed, You can Apply for Jobs Now");
+			return "redirect:/jobseeker/home";
 		} else {
 			session.setAttribute("error", "Invalid Session, Login Again");
 			return "redirect:/login";
