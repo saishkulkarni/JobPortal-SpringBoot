@@ -2,296 +2,355 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Job Portal - Find your dream job">
-  <meta name="keywords" content="jobs, career, employment, job search">
-  <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
-  <title>Job Portal - Job Seeker Home</title>
-  <style>
-      :root {
-          --primary-color: #2c3e50;
-          --secondary-color: #27ae60;
-          --accent-color: #3498db;
-          --text-light: #ecf0f1;
-          --text-dark: #2c3e50;
-          --border-color: #bdc3c7;
-      }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Job Portal - Job Seeker Dashboard">
+    <meta name="keywords" content="job search, career opportunities, job seeker">
+    <meta name="author" content="Job Portal">
+    <meta name="robots" content="index, follow">
 
-      * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          font-family: 'Inter', Arial, sans-serif;
-      }
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-      html {
-          scroll-behavior: smooth;
-      }
+    <title>Job Portal - Job Seeker Dashboard</title>
 
-      body {
-          line-height: 1.6;
-      }
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #34a853;
+            --dark-color: #1f2937;
+            --light-color: #ffffff;
+            --gray-color: #f8f9fa;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
 
-      .navbar {
-          background-color: var(--primary-color);
-          padding: 1rem 2rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          position: fixed;
-          width: 100%;
-          top: 0;
-          z-index: 1000;
-      }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-      .logo {
-          color: white;
-          font-size: clamp(1.2rem, 2vw, 1.5rem);
-          font-weight: bold;
-      }
+        body {
+            line-height: 1.6;
+            background-color: var(--gray-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-      .logo a {
-          color: white;
-          text-decoration: none;
-      }
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.98);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
 
-      .nav-buttons {
-          display: flex;
-          gap: 1rem;
-      }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-      .nav-btn {
-          padding: 0.5rem 1.5rem;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          font-weight: bold;
-          transition: all 0.3s ease;
-      }
+        .logo a {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
 
-      .register-btn {
-          background-color: var(--secondary-color);
-          color: white;
-      }
+        .dashboard-container {
+            flex: 1;
+            padding: 8rem 5% 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-bottom: 80px;
+        }
 
-      .login-btn {
-          background-color: transparent;
-          color: white;
-          border: 2px solid white;
-      }
+        .dashboard-title {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-      .register-btn:hover {
-          background-color: #219a52;
-          transform: translateY(-2px);
-      }
+        .search-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
 
-      .login-btn:hover {
-          background-color: rgba(255, 255, 255, 0.1);
-          transform: translateY(-2px);
-      }
+        .search-form {
+            display: flex;
+            gap: 1rem;
+        }
 
-      .alert-message {
-          position: fixed;
-          top: 100px;
-          right: 20px;
-          z-index: 1001;
-          padding: 1rem 2rem;
-          border-radius: 8px;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-          animation: slideIn 0.5s ease-out;
-          max-width: 400px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-      }
+        .search-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
 
-      .alert-message.success {
-          background-color: #27ae60;
-          color: white;
-          border-left: 4px solid #219a52;
-      }
+        .search-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+        }
 
-      .alert-message.error {
-          background-color: #e74c3c;
-          color: white;
-          border-left: 4px solid #c0392b;
-      }
+        .action-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
 
-      .alert-close {
-          background: none;
-          border: none;
-          color: white;
-          cursor: pointer;
-          margin-left: 10px;
-          font-size: 1.2rem;
-          padding: 0 5px;
-      }
+        .action-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
 
-      .alert-close:hover {
-          opacity: 0.8;
-      }
+        .action-card:hover {
+            transform: translateY(-10px);
+        }
 
-      @keyframes slideIn {
-          from {
-              transform: translateX(100%);
-              opacity: 0;
-          }
-          to {
-              transform: translateX(0);
-              opacity: 1;
-          }
-      }
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-      .footer {
-          background-color: var(--primary-color);
-          color: white;
-          padding: 2rem;
-          text-align: center;
-          width: 100%;
-          position: fixed;
-          bottom: 0;
-      }
+        .card-title {
+            font-size: 1.3rem;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
 
-      .footer-content {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 1rem;
-      }
+        .card-btn {
+            background: var(--gradient);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
 
-      .footer-links {
-          display: flex;
-          justify-content: center;
-          gap: 2rem;
-          margin-bottom: 1rem;
-          flex-wrap: wrap;
-      }
+        .card-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 115, 232, 0.4);
+        }
 
-      .footer-links a {
-          color: white;
-          text-decoration: none;
-          transition: color 0.3s ease;
-      }
+        .logout-btn {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-      .footer-links a:hover {
-          color: var(--accent-color);
-      }
+        .logout-btn:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
 
-      .footer-text {
-          color: var(--border-color);
-          font-size: 0.9rem;
-      }
+        .alert-message {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            z-index: 1000;
+            animation: slideIn 0.5s ease-out;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
 
-      .content {
-          margin-top: 80px;
-          padding: 2rem;
-          text-align: center;
-      }
+        .success {
+            background-color: rgba(52, 168, 83, 0.1);
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+        }
 
-      .content h1 {
-          margin-bottom: 2rem;
-          color: var(--text-dark);
-      }
+        .error {
+            background-color: rgba(234, 67, 53, 0.1);
+            color: #ea4335;
+            border: 1px solid #ea4335;
+        }
 
-      .content button {
-          padding: 0.8rem 2rem;
-          margin: 0.5rem;
-          background-color: var(--accent-color);
-          color: white;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-      }
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
 
-      .content button:hover {
-          background-color: #2980b9;
-          transform: translateY(-2px);
-      }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
 
-      @media (max-width: 768px) {
-          .footer {
-              padding: 1.5rem 1rem;
-          }
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1.3rem 5%;
+            margin-top: auto;
+        }
 
-          .footer-links {
-              gap: 1.5rem;
-          }
-      }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-      @media (max-width: 480px) {
-          .navbar {
-              padding: 1rem;
-          }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+        }
 
-          .nav-buttons {
-              gap: 0.5rem;
-          }
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
 
-          .nav-btn {
-              padding: 0.4rem 1rem;
-              font-size: 0.9rem;
-          }
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
 
-          .footer-links {
-              flex-direction: column;
-              gap: 1rem;
-          }
-      }
-  </style>
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 6rem 1rem 2rem;
+            }
+
+            .search-form {
+                flex-direction: column;
+            }
+
+            .action-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <nav class="navbar">
-      <div class="logo"><a href="/jobseeker/home">JobPortal</a></div>
-      <div class="nav-buttons">
-          <a href="/logout"><button class="nav-btn login-btn">Logout</button></a>
-      </div>
-  </nav>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/jobseeker/home">
+                <img src="/assets/favicon.png" alt="Job Portal Logo"
+                    style="width: 30px; height: 30px; margin-right: 10px;">
+                Job Portal
+            </a>
+        </div>
+        <a href="/logout" class="logout-btn">Logout <i class="fas fa-sign-out-alt"></i></a>
+    </nav>
 
-  <div class="content">
-      <div th:if="${session.success}" class="alert-message success">
-          <span th:text="${session.success}"></span>
-          <button class="alert-close" onclick="this.parentElement.style.display='none'">×</button>
-          <th:block th:text="${@messageRemover.remove()}"></th:block>
-      </div>
-      <div th:if="${session.error}" class="alert-message error">
-          <span th:text="${session.error}"></span>
-          <button class="alert-close" onclick="this.parentElement.style.display='none'">×</button>
-          <th:block th:text="${@messageRemover.remove()}"></th:block>
-      </div>
+    <div class="dashboard-container">
+        <h1 class="dashboard-title">Job Seeker Dashboard</h1>
 
-      <h1>Job Seeker Home</h1>
-      <a th:if="${!session.jobSeeker.completed}" href="/jobseeker/complete-profile"><button>Complete Your Profile</button></a>
+        <div th:if="${session.success}" class="alert-message success">
+            <span th:text="${session.success}"></span>
+            <th:block th:text="${@messageRemover.remove()}"></th:block>
+        </div>
+        <div th:if="${session.error}" class="alert-message error">
+            <span th:text="${session.error}"></span>
+            <th:block th:text="${@messageRemover.remove()}"></th:block>
+        </div>
 
-      <a href="/jobseeker/view-jobs"><button>View All Jobs</button></a>
+        <div class="search-section">
+            <form action="/search-jobs" method="post" class="search-form">
+                <input type="text" name="query" class="search-input"
+                    placeholder="Search jobs by title, skills, or location...">
+                <button type="submit" class="card-btn">
+                    <i class="fas fa-search"></i> Search Jobs
+                </button>
+            </form>
+        </div>
 
-      <form action="/search-jobs" method="post">
-			<input type="text" name="query" class="search-input" placeholder="Job title or keyword">
-			<button class="search-btn">Search Jobs</button>
-	</form>
-  </div>
+        <div class="action-cards">
+            <div class="action-card" th:if="${!session.jobSeeker.completed}">
+                <i class="fas fa-user-edit card-icon"></i>
+                <h2 class="card-title">Complete Your Profile</h2>
+                <a href="/jobseeker/complete-profile" class="card-btn">Update Profile</a>
+            </div>
 
-  <footer class="footer">
-      <div class="footer-content">
-          <div class="footer-links">
-              <a href="/about-us">About Us</a>
-              <a href="/contact">Contact</a>
-              <a href="/privacy-policy">Privacy Policy</a>
-              <a href="/terms">Terms of Service</a>
-          </div>
-          <p class="footer-text">© 2024 JobPortal. All rights reserved.</p>
-      </div>
-  </footer>
+            <div class="action-card">
+                <i class="fas fa-briefcase card-icon"></i>
+                <h2 class="card-title">Browse Jobs</h2>
+                <a href="/jobseeker/view-jobs" class="card-btn">View All Jobs</a>
+            </div>
 
-  <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          const alerts = document.querySelectorAll('.alert-message');
-          alerts.forEach(alert => {
-              setTimeout(() => {
-                  alert.style.display = 'none';
-              }, 2000);
-          });
-      });
-  </script>
+            <div class="action-card">
+                <i class="fas fa-file-alt card-icon"></i>
+                <h2 class="card-title">My Applications</h2>
+                <a href="/jobseeker/my-applications" class="card-btn">View Applications</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/about-us">About Us</a>
+                <a href="/privacy-policy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const alerts = document.querySelectorAll('.alert-message');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.style.display = 'none';
+                }, 2000);
+            });
+        });
+    </script>
 </body>
+
 </html>

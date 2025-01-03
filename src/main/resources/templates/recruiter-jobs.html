@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,8 @@
     <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <title>Job Portal - Manage Jobs</title>
@@ -218,6 +220,53 @@
             color: var(--primary-color);
         }
 
+        .alert-message {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            z-index: 1000;
+            animation: slideIn 0.5s ease-out;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .success {
+            background-color: rgba(52, 168, 83, 0.1);
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+        }
+
+        .error {
+            background-color: rgba(234, 67, 53, 0.1);
+            color: #ea4335;
+            border: 1px solid #ea4335;
+        }
+
+        .alert-close {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: inherit;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+
         @media (max-width: 768px) {
             .jobs-grid {
                 grid-template-columns: 1fr;
@@ -235,11 +284,24 @@
         }
     </style>
 </head>
+
 <body>
+    <div th:if="${session.success}" class="alert-message success">
+        <span th:text="${session.success}"></span>
+        <button class="alert-close" onclick="this.parentElement.style.display='none'">×</button>
+        <th:block th:text="${@messageRemover.remove()}"></th:block>
+    </div>
+    <div th:if="${session.error}" class="alert-message error">
+        <span th:text="${session.error}"></span>
+        <button class="alert-close" onclick="this.parentElement.style.display='none'">×</button>
+        <th:block th:text="${@messageRemover.remove()}"></th:block>
+    </div>
+
     <nav class="navbar">
         <div class="logo">
             <a href="/recruiter/home">
-                <img src="/assets/favicon.png" alt="Job Portal Logo" style="width: 30px; height: 30px; margin-right: 10px;">
+                <img src="/assets/favicon.png" alt="Job Portal Logo"
+                    style="width: 30px; height: 30px; margin-right: 10px;">
                 Job Portal
             </a>
         </div>
@@ -276,8 +338,8 @@
                 </div>
                 <div class="job-detail">
                     <strong>Status:</strong>
-                    <span class="status-badge" th:classappend="${job.approved ? 'approved' : 'pending'}" 
-                          th:text="${job.approved ? 'Approved' : 'Pending'}"></span>
+                    <span class="status-badge" th:classappend="${job.approved ? 'approved' : 'pending'}"
+                        th:text="${job.approved ? 'Approved' : 'Pending'}"></span>
                 </div>
                 <div class="action-buttons">
                     <a th:href="'/recruiter/edit-job/'+${job.id}" class="action-btn edit-btn">
@@ -300,5 +362,17 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const alerts = document.querySelectorAll('.alert-message');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.style.display = 'none';
+                }, 2000);
+            });
+        });
+    </script>
+
 </body>
+
 </html>
