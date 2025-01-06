@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jsp.job_portal.dto.Education;
 import com.jsp.job_portal.dto.Experience;
 import com.jsp.job_portal.dto.Job;
+import com.jsp.job_portal.dto.JobApplication;
 import com.jsp.job_portal.dto.JobSeeker;
 import com.jsp.job_portal.helper.CloudinaryHelper;
 import com.jsp.job_portal.repository.JobRepository;
@@ -129,4 +130,22 @@ public class JobSeekerController {
 		}
 	}
 
+	@GetMapping("/my-applications")
+	public String viewApplications(HttpSession session, ModelMap map) {
+		if (session.getAttribute("jobSeeker") != null) {
+			JobSeeker jobSeeker = (JobSeeker) session.getAttribute("jobSeeker");
+			List<JobApplication> applications=jobSeeker.getJobApplications();
+			if (applications.isEmpty()) {
+				session.setAttribute("error", "No Applications Found");
+				return "redirect:/jobseeker/home";
+			} else {
+				map.put("applications", applications);
+				return "jobseeker-applications.html";
+			}
+		} else {
+			session.setAttribute("error", "Invalid Session, Login Again");
+			return "redirect:/login";
+		}
+
+	}
 }

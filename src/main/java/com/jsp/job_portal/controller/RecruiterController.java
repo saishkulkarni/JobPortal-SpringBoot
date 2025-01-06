@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jsp.job_portal.dto.Job;
+import com.jsp.job_portal.dto.JobApplication;
+import com.jsp.job_portal.dto.JobSeeker;
 import com.jsp.job_portal.dto.Recruiter;
+import com.jsp.job_portal.repository.ApplicationRepository;
 import com.jsp.job_portal.repository.JobRepository;
+import com.jsp.job_portal.repository.JobSeekerRepository;
 import com.jsp.job_portal.service.RecruiterService;
 
 import jakarta.servlet.http.HttpSession;
@@ -26,6 +30,12 @@ public class RecruiterController {
 
 	@Autowired
 	RecruiterService recruiterService;
+
+	@Autowired
+	ApplicationRepository applicationRepository;
+
+	@Autowired
+	JobSeekerRepository jobSeekerRepository;
 
 	@Autowired
 	JobRepository jobRepository;
@@ -142,6 +152,35 @@ public class RecruiterController {
 			session.setAttribute("success", "Job Updated Success");
 			return "redirect:/recruiter/manage-jobs";
 		} else {
+			session.setAttribute("error", "Invalid Session, Login Again");
+			return "redirect:/login";
+		}
+	}
+
+	@GetMapping("/view-applicaitions")
+	public String viewApplications(HttpSession session,ModelMap map) {
+		if (session.getAttribute("recruiter") != null) {
+			Recruiter recruiter = (Recruiter) session.getAttribute("recruiter");
+			List<Job> jobs = jobRepository.findByRecruiter(recruiter);
+			map.put("jobs", jobs);
+			return "recruiter-applications.html";
+		} else {
+			session.setAttribute("error", "Invalid Session, Login Again");
+			return "redirect:/login";
+		}
+	}
+
+	@GetMapping("/application/{id}")
+	public String viewAppliedCandidates(@PathVariable("id") int id,ModelMap map,HttpSession session) {
+		if (session.getAttribute("recruiter") != null) {
+			Job job=jobRepository.findById(id).get();
+			List<JobApplication> applications=applicationRepository.findByJob(job);
+
+			List<JobSeeker> appliers=jobSeekerRepository.findByJobApplicationsIn(applications);
+			map.put("appliers", appliers);
+			return "recruiter-applied-candidates.html";
+		}
+		else {
 			session.setAttribute("error", "Invalid Session, Login Again");
 			return "redirect:/login";
 		}

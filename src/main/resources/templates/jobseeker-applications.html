@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Job Portal - My Applications">
+    <meta name="keywords" content="jobs, applications, status">
+    <meta name="author" content="Job Portal">
+    <meta name="robots" content="index, follow">
+
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <title>Job Portal - My Applications</title>
+
+    <style>
+    
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #34a853;
+            --dark-color: #1f2937;
+            --light-color: #ffffff;
+            --gray-color: #f8f9fa;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            background-color: var(--gray-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.98);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo a {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .content {
+            flex: 1;
+            padding: 8rem 5% 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .alert-message {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            z-index: 1000;
+            animation: slideIn 0.5s ease-out;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .success {
+            background-color: rgba(52, 168, 83, 0.1);
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+        }
+
+        .error {
+            background-color: rgba(234, 67, 53, 0.1);
+            color: #ea4335;
+            border: 1px solid #ea4335;
+        }
+
+       
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+        .logout-btn {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logout-btn:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+        .status-pending {
+            background-color: #fef3c7;
+            color: #d97706;
+            border: 1px solid #d97706;
+        }
+
+        .status-accepted {
+            background-color: #dcfce7;
+            color: #15803d;
+            border: 1px solid #15803d;
+        }
+
+        .status-rejected {
+            background-color: #fee2e2;
+            color: #dc2626;
+            border: 1px solid #dc2626;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/jobseeker/home">
+                <img src="/assets/favicon.png" alt="Job Portal Logo" style="width: 30px; height: 30px; margin-right: 10px;">
+                Job Portal
+            </a>
+        </div>
+        <a href="/logout" class="logout-btn">Logout <i class="fas fa-sign-out-alt"></i></a>
+    </nav>
+
+    <div class="content">
+        <h1 class="page-title">My Applications</h1>
+
+        <div th:if="${session.success}" class="alert-message success">
+            <span th:text="${session.success}"></span>
+            <th:block th:text="${@messageRemover.remove()}"></th:block>
+        </div>
+        <div th:if="${session.error}" class="alert-message error">
+            <span th:text="${session.error}"></span>
+            <th:block th:text="${@messageRemover.remove()}"></th:block>
+        </div>
+
+        <div class="jobs-grid">
+            <div class="job-card" th:each="x:${applications}">
+                <h3 th:text="${x.job.role}">Role</h3>
+                <div class="job-detail">
+                    <strong><i class="fas fa-building"></i> Company:</strong>
+                    <span th:text="${x.job.recruiter.companyName}"></span>
+                </div>
+                <div class="job-detail">
+                    <strong><i class="fas fa-money-bill-wave"></i> Package:</strong>
+                    <span th:text="${x.job.ctc}+' LPA'"></span>
+                </div>
+                <div class="job-detail">
+                    <strong><i class="fas fa-info-circle"></i> Description:</strong>
+                    <span th:text="${x.job.description}"></span>
+                </div>
+                <div class="job-detail">
+                    <strong><i class="fas fa-calendar"></i> Applied On:</strong>
+                    <span th:text="${x.appliedTime}"></span>
+                </div>
+                <div class="job-detail">
+                    <strong><i class="fas fa-check-circle"></i> Status:</strong>
+                    <span class="status-badge" 
+                          th:classappend="${x.status == 'PENDING' ? 'status-pending' : 
+                                         x.status == 'ACCEPTED' ? 'status-accepted' :
+                                         x.status == 'SCHEDULED' ? 'status-scheduled' : 'status-rejected'}"
+                          th:text="${x.status}">
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const alerts = document.querySelectorAll('.alert-message');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.style.display = 'none';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
