@@ -3,6 +3,10 @@ package com.jsp.job_portal.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.jsp.job_portal.repository.JobRepository;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -56,4 +60,13 @@ public class JobSeeker {
 
 	private String resumeUrl;
 	private String profilePicUrl;
+
+	public JobApplication getStatus(Job job){
+		for(JobApplication application : this.jobApplications){
+			if(application.getJob().getId() == job.getId()){
+				return application;
+			}
+		}
+		return null;
+	}
 }

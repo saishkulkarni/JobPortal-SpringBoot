@@ -97,7 +97,7 @@ public class JobSeekerService {
 			if(applications.isEmpty()){
 				JobApplication application=new JobApplication();
 				application.setJob(job);
-				application.setStatus("Applied");
+				application.setStatus("APPLIED");
 
 				applications.add(application);
 
