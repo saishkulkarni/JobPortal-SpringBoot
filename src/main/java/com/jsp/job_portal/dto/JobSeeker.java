@@ -61,7 +61,7 @@ public class JobSeeker {
 	private String resumeUrl;
 	private String profilePicUrl;
 
-	public JobApplication getStatus(Job job){
+	public JobApplication getApplication(Job job){
 		for(JobApplication application : this.jobApplications){
 			if(application.getJob().getId() == job.getId()){
 				return application;

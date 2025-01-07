@@ -215,9 +215,9 @@
                         <i class="fas fa-download"></i> Download Resume
                     </a>
                 <p class="candidate-skills" style="margin-top: 1rem;">
-                    Status: <span th:text="${applier.getStatus(job).status}"></span>
+                    Status: <span th:text="${applier.getApplication(job).status}"></span>
                 </p>
-                <form th:action="'/recruiter/update-status/'+${applier.getStatus(job).id}" method="post">
+                <form th:action="'/recruiter/update-status/'+${applier.getApplication(job).id}" method="post">
                 <select class="download-btn" name="status" style="margin-top: 1rem; cursor: pointer; appearance: none; background: var(--gradient); color: white; font-size: 0.9rem; font-weight: 500; border: none; padding: 0.8rem;">
                     <option value="" style="background: white; color: var(--dark-color);">Change Status</option>
                     <option value="ACCEPTED" style="background: white; color: var(--dark-color);">Accept</option>
