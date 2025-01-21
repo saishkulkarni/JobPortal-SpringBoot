@@ -58,7 +58,7 @@ public class JobSeekerService {
 			jobSeeker.setPassword(AES.encrypt(jobSeeker.getPassword()));
 			seekerRepository.save(jobSeeker);
 			System.err.println(jobSeeker.getOtp());
-			//emailSender.sendOtp(jobSeeker);
+			emailSender.sendOtp(jobSeeker);
 			session.setAttribute("success", "Otp Sent Success!!!");
 			return "redirect:/jobseeker/otp/" + jobSeeker.getId();
 		}
@@ -83,7 +83,7 @@ public class JobSeekerService {
 		jobSeeker.setVerified(false);
 		seekerRepository.save(jobSeeker);
 		System.err.println(jobSeeker.getOtp());
-		//emailSender.sendOtp(jobSeeker);
+		emailSender.sendOtp(jobSeeker);
 		session.setAttribute("success", "OTP Resent Success");
 		return "redirect:/jobseeker/otp/" + jobSeeker.getId();
 	}

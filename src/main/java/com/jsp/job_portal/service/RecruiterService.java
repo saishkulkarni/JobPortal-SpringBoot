@@ -41,7 +41,7 @@ public class RecruiterService {
 			recruiter.setVerified(false);
 			recruiterRepository.save(recruiter);
 			System.err.println(recruiter.getOtp());
-			//emailSender.sendOtp(recruiter);
+			emailSender.sendOtp(recruiter);
 			session.setAttribute("success", "Otp Sent Success");
 			return "redirect:/recruiter/otp/" + recruiter.getId();
 		}
@@ -68,7 +68,7 @@ public class RecruiterService {
 		recruiter.setVerified(false);
 		recruiterRepository.save(recruiter);
 		System.err.println(recruiter.getOtp());
-		//emailSender.sendOtp(recruiter);
+		emailSender.sendOtp(recruiter);
 		session.setAttribute("success", "Otp Re-Sent Success");
 		return "redirect:/recruiter/otp/" + recruiter.getId();
 	}

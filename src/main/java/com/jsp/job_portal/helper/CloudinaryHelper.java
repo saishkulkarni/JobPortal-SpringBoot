@@ -10,6 +10,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 
 @Service
+@SuppressWarnings("rawtypes")
 public class CloudinaryHelper {
 
     @Value("${CLOUDINARY_URL}")
